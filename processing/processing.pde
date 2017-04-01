@@ -47,15 +47,40 @@ class Mirror {
 
 // class for those four app icons
 class Apps{ 
-  
+  ImageButton weather;
+  ImageButton calendar;
+  ImageButton health;
+  ImageButton media;
+
+  AppsWindow appsWindow;
+
   Apps() {
+    appsWindow = new AppsWindow();
+
+    PImage weatherIcon = loadImage("images/logo.png");
+    weather = new ImageButton(280,280, weatherIcon, "weather");
+  }
+
+  void draw() {
+    appsWindow.draw();
+
+
+    weather.update();
+  }
+  
+}
+
+class AppsWindow {
+
+  AppsWindow() {
 
   }
 
   void draw() {
 
   }
-  
+
+
 }
 
 //*******************************end apps class*******************//
@@ -77,7 +102,7 @@ class MusicPlayer {
   SongListWindow songListWindow;
 
   MusicPlayer() {
-
+    songListWindow = new SongListWindow();
   }
 
   void draw() {
@@ -107,7 +132,7 @@ class More {
   ImageButton[] buttons;
 
   More() {
-
+    moreWIndow = new MoreWindow();
   }
 
   void draw() {
@@ -132,6 +157,8 @@ class Info {
   InfoDate infoDate;
 
   Info () {
+    infoTime = new InfoTime();
+    infoDate = new InfoDate();
 
   }
 
