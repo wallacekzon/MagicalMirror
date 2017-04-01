@@ -1,42 +1,71 @@
-
+Mirror mainMirror;
 
 void setup(){
+  mainMirror = new Mirror();
+
   size(1280, 800);
   background(200);
 }
 
 void draw() {
-
+  mainMirror.draw();
 }
 
 void mouseReleased() {
 
 }
 
+//*******************************start main mirror class*******************//
 
 // this is the main Mirror class containing all other elements 
 class Mirror {
   Apps apps;
-  Mp3Player mp3Player;
+  MusicPlayer musicPlayer;
   More more;
   Info info;
 
   Mirror() {
     apps = new Apps();
-    mp3Player = new mp3Player();
+    musicPlayer = new MusicPlayer();
     more = new More();
     info = new Info();
   }
+
+  void draw() {
+    apps.draw();
+    musicPlayer.draw();
+    more.draw();
+    info.draw();
+  }
 }
+
+//*******************************end main mirror class*******************//
+
+
+
+//*******************************start apps class*******************//
 
 // class for those four app icons
 class Apps{ 
   
+  Apps() {
+
+  }
+
+  void draw() {
+
+  }
   
 }
 
+//*******************************end apps class*******************//
+
+
+
+//*******************************start music player classes*******************//
+
 // music player, shall we also make a spotify login page?
-class Mp3Player {
+class MusicPlayer {
   ImageButton backTrack;
   ImageButton playPause;
   ImageButton forward;
@@ -46,6 +75,14 @@ class Mp3Player {
   ImageButton songList;
 
   SongListWindow window;
+
+  MusicPlayer() {
+
+  }
+
+  void draw() {
+
+  }
 }
 
 class SongListWindow {
@@ -53,13 +90,30 @@ class SongListWindow {
   SongListWindow() {
 
   }
+
+  void draw() {
+
+  }
 }
+
+//*******************************end music player classes*******************//
+
+
+//*******************************start More classes*******************//
 
 // where the account, setting, etc. are 
 class More {
   MoreWindow window;
+  ImageButton[] buttons;
 
-  
+  More() {
+
+  }
+
+  void draw() {
+    window.draw();
+  }
+
 }
 
 class MoreWindow {
@@ -67,19 +121,48 @@ class MoreWindow {
   MoreWindow() {
   
   }
+
+  void draw() {
+  
+  }
 }
 
 class Info {
-  
+  InfoTime infoTime;
+  InfoDate infoDate;
+
+  Info {
+
+  }
+
+  void draw() {
+    infoTime.draw();
+    infoDate.draw();
+  }
 }
 
 class InfoTime {
-  
+  InfoTime() {
+
+  }
+
+  void draw() {
+
+  }
 }
 
 class InfoDate {
   
+  InfoDate() {
+
+  }
+
+  void draw() {
+  
+  }
 }
+
+//*******************************end More classes*******************//
 
 class ImageButton {
   String label;
