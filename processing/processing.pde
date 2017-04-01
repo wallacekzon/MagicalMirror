@@ -13,7 +13,7 @@ int ENGLISH = 1, CHINESE = 2;
 int LANGUAGE = ENGLISH;
 
 // selected window at the moment (related to ACCESSABLE_BUTTONS_ON_WINDOW), -1 mean none
-boolean ON_WINDOW = false;
+int ON_WINDOW = -1;
 
 // all buttons that are accessable on the main screen
 int ACCESSABLE_BUTTONS_ON_WINDOW = {
@@ -56,24 +56,31 @@ void mouseReleased() {
         if (loopCounter == 0) {
           // app 1
           mainMirror.apps.clicked(loopCounter);
+          ON_WINDOW = loopCounter;
         } else if (loopCounter == 1) {
           // app 2
           mainMirror.apps.clicked(loopCounter);
+          ON_WINDOW = loopCounter;
         } else if (loopCounter == 2) {
           // app 3
           mainMirror.apps.clicked(loopCounter);
+          ON_WINDOW = loopCounter;
         } else if (loopCounter == 3) {
           // app 4
           mainMirror.apps.clicked(loopCounter);
+          ON_WINDOW = loopCounter;
         } else if (loopCounter == 4) {
           // app icon 1
           mainMirror.apps.clicked(loopCounter);
+          ON_WINDOW = loopCounter;
         } else if (loopCounter == 5) {
           // app icon 2
           mainMirror.apps.clicked(loopCounter);
+          ON_WINDOW = loopCounter;
         } else if (loopCounter == 6) {
           // app icon 3
           mainMirror.apps.clicked(loopCounter);
+          ON_WINDOW = loopCounter;
         } 
         
         
@@ -105,7 +112,7 @@ void mouseReleased() {
 
       } else {
         // user touched on other parts
-        ON_WINDOW = false;
+        ON_WINDOW = -1;
       }
       
   }
@@ -172,31 +179,31 @@ class Apps{
 
   // event handler
   void clicked(int clickedIndex) {
-    swtich (clickedIndex) {
-      0 :
+    // swtich (clickedIndex) {
+    //   case 0 :
       
-      break;
-      1 :
+    //   break;
+    //   case 1 :
 
-      break;
-      2 :
+    //   break;
+    //   case 2 :
 
-      break;
-      3 :
+    //   break;
+    //   case 3 :
 
-      break;
-      4 :
+    //   break;
+    //   case 4 :
 
-      break;
-      5 :
+    //   break;
+    //   case 5 :
 
-      break;
-      6 :
+    //   break;
+    //   case 6 :
 
-      break;
-      default:
-      // panic!!
-    }
+    //   break;
+    //   default:
+    //   panic!!
+    // }
   }
 
   void draw() {
