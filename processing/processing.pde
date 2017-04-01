@@ -74,14 +74,14 @@ class MusicPlayer {
 
   ImageButton songList;
 
-  SongListWindow window;
+  SongListWindow songListWindow;
 
   MusicPlayer() {
 
   }
 
   void draw() {
-
+    songListWindow.draw();
   }
 }
 
@@ -103,7 +103,7 @@ class SongListWindow {
 
 // where the account, setting, etc. are 
 class More {
-  MoreWindow window;
+  MoreWindow moreWIndow;
   ImageButton[] buttons;
 
   More() {
@@ -111,7 +111,7 @@ class More {
   }
 
   void draw() {
-    window.draw();
+    moreWIndow.draw();
   }
 
 }
