@@ -13,7 +13,7 @@ int ENGLISH = 1, CHINESE = 2;
 int LANGUAGE = ENGLISH;
 
 // selected window at the moment (related to ACCESSABLE_BUTTONS_ON_WINDOW), -1 mean none
-int ON_WINDOW = -1;
+boolean ON_WINDOW = false;
 
 // all buttons that are accessable on the main screen
 int ACCESSABLE_BUTTONS_ON_WINDOW = {
@@ -51,22 +51,33 @@ void mouseReleased() {
   for (int loopCounter=0; loopCounter < BUTTONS.length; loopCounter++){
       if ((mouseX > BUTTONS[loopCounter][0]) && (mouseX < BUTTONS[loopCounter][0]+BUTTONX)
       && (mouseY > BUTTONS[loopCounter][1]) && (mouseY < BUTTONS[loopCounter][1]+BUTTONY)){
-        
+        ON_WINDOW = true;
+
         if (loopCounter == 0) {
           // app 1
+          mainMirror.apps.clicked(loopCounter);
         } else if (loopCounter == 1) {
           // app 2
+          mainMirror.apps.clicked(loopCounter);
         } else if (loopCounter == 2) {
           // app 3
+          mainMirror.apps.clicked(loopCounter);
         } else if (loopCounter == 3) {
           // app 4
+          mainMirror.apps.clicked(loopCounter);
         } else if (loopCounter == 4) {
           // app icon 1
+          mainMirror.apps.clicked(loopCounter);
         } else if (loopCounter == 5) {
           // app icon 2
+          mainMirror.apps.clicked(loopCounter);
         } else if (loopCounter == 6) {
           // app icon 3
-        } else if (loopCounter == 7) {
+          mainMirror.apps.clicked(loopCounter);
+        } 
+        
+        
+        else if (loopCounter == 7) {
           // player backTrack
         } else if (loopCounter == 8) {
           // player playPause
@@ -80,7 +91,10 @@ void mouseReleased() {
           // player songListIcon
         } else if (loopCounter == 13) {
           // player songList
-        } else if (loopCounter == 14) {
+        } 
+        
+        
+        else if (loopCounter == 14) {
           // more
         } else if (loopCounter == 15) {
           // lock
@@ -91,6 +105,7 @@ void mouseReleased() {
 
       } else {
         // user touched on other parts
+        ON_WINDOW = false;
       }
       
   }
@@ -155,6 +170,35 @@ class Apps{
 
   }
 
+  // event handler
+  void clicked(int clickedIndex) {
+    swtich (clickedIndex) {
+      0 :
+      
+      break;
+      1 :
+
+      break;
+      2 :
+
+      break;
+      3 :
+
+      break;
+      4 :
+
+      break;
+      5 :
+
+      break;
+      6 :
+
+      break;
+      default:
+      // panic!!
+    }
+  }
+
   void draw() {
     if (LANGUAGE == ENGLISH) {
       appsWindowEnglish.draw();
@@ -201,15 +245,32 @@ class AppsWindowEnglish {
 }
 
 class AppsWindowChinese {
+  int onIcon = 0;
+  int onSubIcon = 0;
+
   ImageButton[] images;
   ImageButton[] buttons;
 
   AppsWindowChinese() {
+    images = new ImageButton[4];
+
+    PImage appImage = loadImage("english.jpg");
+    images[0] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 5, appImage, "weatherWindow");
+
+    appImage = loadImage("english.jpg");
+    images[1] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 5, appImage, "calendarWindow");
+    
+    appImage = loadImage("english.jpg");
+    images[2] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 5, appImage, "healthWindow");
+    
+    appImage = loadImage("english.jpg");
+    images[3] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 5, appImage, "mediaWindow");
 
   }
 
   void draw() {
-
+      images[onIcon].display();
+      images[onSubIcon].display();
   }
 }
 
