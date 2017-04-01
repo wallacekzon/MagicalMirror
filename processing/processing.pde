@@ -131,7 +131,7 @@ class Info {
   InfoTime infoTime;
   InfoDate infoDate;
 
-  Info {
+  Info () {
 
   }
 
