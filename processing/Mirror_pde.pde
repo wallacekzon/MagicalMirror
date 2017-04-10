@@ -1,4 +1,5 @@
 PFont font;
+int Color;
 int MIRROR_WIDTH = 1200;
 int MIRROR_HEIGHT = 675;
 int ICON_OFFSET = MIRROR_WIDTH/4;
