@@ -1,5 +1,6 @@
 PFont font;
-int Color;
+PImage imgLock;
+color COLOR = color(0,0,0);
 int MIRROR_WIDTH = 1200;
 int MIRROR_HEIGHT = 675;
 int ICON_OFFSET = MIRROR_WIDTH/4;
@@ -11,6 +12,7 @@ int buttonY;
 int moreSelOne = -1, moreSelTwo = -1, moreSelThree = -1, moreDumb = 0;
 boolean moreLevel1 = false, moreLevel2 = false, moreLevel3 = false;
 int moreButtonLength = 0;
+int GUEST = 0;
 
 int buttonsMore[][] = {{500, 426}, {500, 466}, {500, 506}};
 int buttonsMoreSet[][] = {{500, 346}, {500, 386}, {500, 426}, {500, 466}, {500, 506}};
@@ -22,12 +24,13 @@ int buttonsMoreSet4[][] = {{500, 306}, {500, 346}, {500, 386}, {500, 426}, {500,
 
 String LANGUAGE = "EN"; //0 - English; 1 - Russian
 
-
 Mirror mainMirror;
 
 void setup(){
   
   mainMirror = new Mirror();
+  imgLock = loadImage("lockscreen.jpg", "jpg");
+  imgLock.loadPixels();
   
   size(1200, 675);
   background(200);
@@ -42,6 +45,7 @@ class Mirror {
   //Apps apps;
   //MusicPlayer musicPlayer;
   More more;
+  Lock lock;
   Info info;
 
   Mirror() {
@@ -49,6 +53,7 @@ class Mirror {
     //musicPlayer = new MusicPlayer();
     more = new More();
     info = new Info();
+    lock = new Lock();
   }
 
   void draw() {
@@ -56,7 +61,17 @@ class Mirror {
     //musicPlayer.draw();
     more.draw();
     info.draw();
+    lock.draw();
     
+  }
+}
+
+class Lock{
+  int ScreenLocked = 0;
+  
+  void draw(){
+    imgLock.resize(15, 15);
+    image(imgLock, ICON_OFFSET + 585, 562);
   }
 }
 
@@ -124,11 +139,10 @@ class More {
     if ((APP_OPEN == 1) && (moreLevel1 == true)){
     fill(255,255,255);
     
-    
     for (int loopCounter=0; loopCounter < buttonsMore.length; loopCounter++)
-    rect(buttonsMore[loopCounter][0]+ICON_OFFSET, buttonsMore[loopCounter][1], buttonX, buttonY, 0);
+      rect(buttonsMore[loopCounter][0]+ICON_OFFSET, buttonsMore[loopCounter][1], buttonX, buttonY, 0);
     
-    fill(0,0,0);
+    fill(COLOR);
     
     font = createFont("Arial",13,true);
     textFont(font);
@@ -143,6 +157,7 @@ class More {
     text(labels[2],ICON_OFFSET+500+35,531);
     
     moreButtonLength = buttonsMore.length;
+    
     }
     else if ((APP_OPEN == 1) && (moreLevel2 == true) && (moreSelOne == 1)){
       
@@ -150,7 +165,7 @@ class More {
           for (int loopCounter=0; loopCounter < buttonsMoreSet.length; loopCounter++)
           rect(buttonsMoreSet[loopCounter][0]+ICON_OFFSET,buttonsMoreSet[loopCounter][1], buttonX, buttonY, 0);
           
-          fill(0,0,0);
+          fill(COLOR);
           font = createFont("Arial",10,true);
           textFont(font);
 
@@ -160,7 +175,7 @@ class More {
           text(labels12[3],ICON_OFFSET+500+35,491);
           text(labels12[4],ICON_OFFSET+500+35,531);
           
-          fill(0,0,0);
+          fill(COLOR);
           font = createFont("Arial",13,true);
           textFont(font);
           text(user,ICON_OFFSET+500+13,575);
@@ -174,7 +189,7 @@ class More {
           for (int loopCounter=0; loopCounter < buttonsMoreAcc.length; loopCounter++)
           rect(buttonsMoreAcc[loopCounter][0]+ICON_OFFSET,buttonsMoreAcc[loopCounter][1], buttonX, buttonY, 0);
           
-          fill(0,0,0);
+          fill(COLOR);
           font = createFont("Arial",10,true);
           textFont(font);
     
@@ -183,7 +198,7 @@ class More {
           text(labels11[2],ICON_OFFSET+500+35,491);
           text(labels11[3],ICON_OFFSET+500+35,531);
           
-          fill(0,0,0);
+          fill(COLOR);
           font = createFont("Arial",13,true);
           textFont(font);
           text(user,ICON_OFFSET+500+13,575);
@@ -201,7 +216,7 @@ class More {
             for (int loopCounter=0; loopCounter < buttonsMoreSet1.length; loopCounter++)
             rect(buttonsMoreSet1[loopCounter][0]+ICON_OFFSET,buttonsMoreSet1[loopCounter][1], buttonX, buttonY, 0);
           
-            fill(0,0,0);
+            fill(COLOR);
             font = createFont("Arial",10,true);
             textFont(font);
 
@@ -209,13 +224,37 @@ class More {
             text(labels121[1],ICON_OFFSET+500+35,491);
             text(labels121[2],ICON_OFFSET+500+35,531);
             
-            fill(0,0,0);
+            
             font = createFont("Arial",13,true);
             textFont(font);
             text(user,ICON_OFFSET+500+13,575);
             triangle(ICON_OFFSET+500, 575, ICON_OFFSET+500+5, 565, ICON_OFFSET+500+10, 575);
             
             moreButtonLength = buttonsMoreSet1.length;
+            
+            if((moreSelThree == 0) || (moreSelThree == -1)){
+              strokeWeight(2);
+              stroke(COLOR);
+              line(ICON_OFFSET + 510, 446, ICON_OFFSET + 525, 446);
+              line(ICON_OFFSET + 518, 440, ICON_OFFSET + 525, 446);
+              line(ICON_OFFSET + 518, 452, ICON_OFFSET + 525, 446);
+              strokeWeight(0);
+            }
+            else if(moreSelThree == 1){
+              strokeWeight(2);
+              stroke(COLOR);
+              line(ICON_OFFSET + 510, 486, ICON_OFFSET + 525, 486);
+              line(ICON_OFFSET + 518, 480, ICON_OFFSET + 525, 486);
+              line(ICON_OFFSET + 518, 492, ICON_OFFSET + 525, 486);
+              strokeWeight(0);
+            }
+
+              strokeWeight(2);
+              stroke(COLOR);
+              line(ICON_OFFSET + 510, 526, ICON_OFFSET + 525, 526);
+              line(ICON_OFFSET + 517, 520, ICON_OFFSET + 510, 526);
+              line(ICON_OFFSET + 517, 532, ICON_OFFSET + 510, 526);
+              strokeWeight(0);
           }
      //language
      else if ((APP_OPEN == 1) && (moreLevel3 == true) && (moreSelTwo == 1) && (moreSelOne == 1)){
@@ -226,7 +265,7 @@ class More {
             for (int loopCounter=0; loopCounter < buttonsMoreSet2.length; loopCounter++)
             rect(buttonsMoreSet2[loopCounter][0]+ICON_OFFSET,buttonsMoreSet2[loopCounter][1], buttonX, buttonY, 0);
           
-            fill(0,0,0);
+            fill(COLOR);
             font = createFont("Arial",10,true);
             textFont(font);
 
@@ -234,13 +273,38 @@ class More {
             text(labels122[1],ICON_OFFSET+500+35,491);
             text(labels122[2],ICON_OFFSET+500+35,531);
             
-            fill(0,0,0);
+            fill(COLOR);
             font = createFont("Arial",13,true);
             textFont(font);
             text(user,ICON_OFFSET+500+13,575);
             triangle(ICON_OFFSET+500, 575, ICON_OFFSET+500+5, 565, ICON_OFFSET+500+10, 575);
             
             moreButtonLength = buttonsMoreSet2.length;
+            
+            if((moreSelThree == 0) || (moreSelThree == -1)){
+              strokeWeight(2);
+              stroke(COLOR);
+              line(ICON_OFFSET + 510, 446, ICON_OFFSET + 525, 446);
+              line(ICON_OFFSET + 518, 440, ICON_OFFSET + 525, 446);
+              line(ICON_OFFSET + 518, 452, ICON_OFFSET + 525, 446);
+              strokeWeight(0);
+            }
+            else if(moreSelThree == 1){
+              strokeWeight(2);
+              stroke(COLOR);
+              line(ICON_OFFSET + 510, 486, ICON_OFFSET + 525, 486);
+              line(ICON_OFFSET + 518, 480, ICON_OFFSET + 525, 486);
+              line(ICON_OFFSET + 518, 492, ICON_OFFSET + 525, 486);
+              strokeWeight(0);
+            }
+
+              strokeWeight(2);
+              stroke(COLOR);
+              line(ICON_OFFSET + 510, 526, ICON_OFFSET + 525, 526);
+              line(ICON_OFFSET + 517, 520, ICON_OFFSET + 510, 526);
+              line(ICON_OFFSET + 517, 532, ICON_OFFSET + 510, 526);
+              strokeWeight(0);
+            
           }
       //reposition
       else if ((APP_OPEN == 1) && (moreLevel3 == true) && (moreSelTwo == 2) && (moreSelOne == 1)){
@@ -251,7 +315,7 @@ class More {
             for (int loopCounter=0; loopCounter < buttonsMoreSet3.length; loopCounter++)
             rect(buttonsMoreSet3[loopCounter][0]+ICON_OFFSET,buttonsMoreSet3[loopCounter][1], buttonX, buttonY, 0);
           
-            fill(0,0,0);
+            fill(COLOR);
             font = createFont("Arial",10,true);
             textFont(font);
 
@@ -260,13 +324,45 @@ class More {
             text(labels123[2],ICON_OFFSET+500+35,491);
             text(labels123[3],ICON_OFFSET+500+35,531);
             
-            fill(0,0,0);
+            fill(COLOR);
             font = createFont("Arial",13,true);
             textFont(font);
             text(user,ICON_OFFSET+500+13,575);
             triangle(ICON_OFFSET+500, 575, ICON_OFFSET+500+5, 565, ICON_OFFSET+500+10, 575);
             
             moreButtonLength = buttonsMoreSet3.length;
+            
+            if(moreSelThree == 0){
+              strokeWeight(2);
+              stroke(COLOR);
+              line(ICON_OFFSET + 510, 406, ICON_OFFSET + 525, 406);
+              line(ICON_OFFSET + 518, 400, ICON_OFFSET + 525, 406);
+              line(ICON_OFFSET + 518, 412, ICON_OFFSET + 525, 406);
+              strokeWeight(0);
+            }
+            else if((moreSelThree == 1) || (moreSelThree == -1)){
+              strokeWeight(2);
+              stroke(COLOR);
+              line(ICON_OFFSET + 510, 446, ICON_OFFSET + 525, 446);
+              line(ICON_OFFSET + 518, 440, ICON_OFFSET + 525, 446);
+              line(ICON_OFFSET + 518, 452, ICON_OFFSET + 525, 446);
+              strokeWeight(0);
+            }
+            else if(moreSelThree == 2){
+              strokeWeight(2);
+              stroke(COLOR);
+              line(ICON_OFFSET + 510, 486, ICON_OFFSET + 525, 486);
+              line(ICON_OFFSET + 518, 480, ICON_OFFSET + 525, 486);
+              line(ICON_OFFSET + 518, 492, ICON_OFFSET + 525, 486);
+              strokeWeight(0);
+            }
+
+              strokeWeight(2);
+              stroke(COLOR);
+              line(ICON_OFFSET + 510, 526, ICON_OFFSET + 525, 526);
+              line(ICON_OFFSET + 517, 520, ICON_OFFSET + 510, 526);
+              line(ICON_OFFSET + 517, 532, ICON_OFFSET + 510, 526);
+              strokeWeight(0);
           }
        //color scheme
        else if ((APP_OPEN == 1) && (moreLevel3 == true) && (moreSelTwo == 3) && (moreSelOne == 1)){
@@ -277,7 +373,7 @@ class More {
             for (int loopCounter=0; loopCounter < buttonsMoreSet4.length; loopCounter++)
             rect(buttonsMoreSet4[loopCounter][0]+ICON_OFFSET,buttonsMoreSet4[loopCounter][1], buttonX, buttonY, 0);
           
-            fill(0,0,0);
+            fill(COLOR);
             font = createFont("Arial",10,true);
             textFont(font);
 
@@ -288,7 +384,7 @@ class More {
             text(labels124[4],ICON_OFFSET+500+35+20,491);
             text(labels124[5],ICON_OFFSET+500+35,531);
             
-            fill(0,0,0);
+            fill(COLOR);
             font = createFont("Arial",13,true);
             textFont(font);
             text(user,ICON_OFFSET+500+13,575);
@@ -306,9 +402,58 @@ class More {
             rect(ICON_OFFSET+500+35,481,10,10);
             
             moreButtonLength = buttonsMoreSet4.length;
+            
+            if(moreSelThree == 0){
+              strokeWeight(2);
+              stroke(COLOR);
+              line(ICON_OFFSET + 510, 326, ICON_OFFSET + 525, 326);
+              line(ICON_OFFSET + 518, 320, ICON_OFFSET + 525, 326);
+              line(ICON_OFFSET + 518, 332, ICON_OFFSET + 525, 326);
+              strokeWeight(0);
+            }
+            else if(moreSelThree == 1){
+              strokeWeight(2);
+              stroke(COLOR);
+              line(ICON_OFFSET + 510, 366, ICON_OFFSET + 525, 366);
+              line(ICON_OFFSET + 518, 360, ICON_OFFSET + 525, 366);
+              line(ICON_OFFSET + 518, 372, ICON_OFFSET + 525, 366);
+              strokeWeight(0);
+            }
+            else if(moreSelThree == 2){
+              strokeWeight(2);
+              stroke(COLOR);
+              line(ICON_OFFSET + 510, 406, ICON_OFFSET + 525, 406);
+              line(ICON_OFFSET + 518, 400, ICON_OFFSET + 525, 406);
+              line(ICON_OFFSET + 518, 412, ICON_OFFSET + 525, 406);
+              strokeWeight(0);
+            }
+            else if(moreSelThree == 3){
+              strokeWeight(2);
+              stroke(COLOR);
+              line(ICON_OFFSET + 510, 446, ICON_OFFSET + 525, 446);
+              line(ICON_OFFSET + 518, 440, ICON_OFFSET + 525, 446);
+              line(ICON_OFFSET + 518, 452, ICON_OFFSET + 525, 446);
+              strokeWeight(0);
+            }
+            else if((moreSelThree == 4) || (moreSelThree == -1)){
+              strokeWeight(2);
+              stroke(COLOR);
+              line(ICON_OFFSET + 510, 486, ICON_OFFSET + 525, 486);
+              line(ICON_OFFSET + 518, 480, ICON_OFFSET + 525, 486);
+              line(ICON_OFFSET + 518, 492, ICON_OFFSET + 525, 486);
+              strokeWeight(0);
+            }
+
+              strokeWeight(2);
+              stroke(COLOR);
+              line(ICON_OFFSET + 510, 526, ICON_OFFSET + 525, 526);
+              line(ICON_OFFSET + 517, 520, ICON_OFFSET + 510, 526);
+              line(ICON_OFFSET + 517, 532, ICON_OFFSET + 510, 526);
+              strokeWeight(0);
+
           }
     else{
-      fill(0,0,0);
+      fill(COLOR);
       background(200);
       font = createFont("Arial",13,true);
       textFont(font);
@@ -457,7 +602,7 @@ void mouseReleased(){
       moreLevel3 = false;
       moreSelOne = -1;
       moreSelTwo = -1;
-      moreSelThree = -1;
+//      moreSelThree = -1;
     }
     
   }
@@ -468,7 +613,7 @@ void mouseReleased(){
     moreLevel3 = false;
     moreSelOne = -1;
     moreSelTwo = -1;
-    moreSelThree = -1;
+    //moreSelThree = -1;
     APP_OPEN = 0;
     moreDumb = 0;
   }
@@ -480,7 +625,10 @@ void mouseReleased(){
         moreSelOne = loopCounter;
         if ((moreSelOne == 2)){
           moreLevel2 = false;
-          moreLevel1 = true;
+          moreLevel1 = false;
+          GUEST      = 1;
+          APP_OPEN   = 0;
+          moreDumb   = 0;
         }
         else{
           moreLevel2 = true;
@@ -499,7 +647,7 @@ void mouseReleased(){
         
             moreSelTwo = loopCounter;
             moreDumb = moreDumb + 1;
-          //println(moreSelTwo);
+
           break;
         }
     }
@@ -578,6 +726,7 @@ void mouseReleased(){
           moreLevel2 = false;
           moreLevel1 = true;
           moreDumb = 0;
+          moreSelTwo = -1;
         }
         
    //returning to second layer
@@ -586,6 +735,7 @@ void mouseReleased(){
         (mouseY > 506) && (mouseY < 506 + buttonY)){
           moreLevel3 = false;
           moreLevel2 = true;
+          moreSelThree = -1;
         }
   
   //reposition
@@ -612,5 +762,31 @@ void mouseReleased(){
        LANGUAGE = "RU";
     }
   }
+
+  //color scheme
+  if ((moreLevel3 == true) && (moreSelTwo == 3)){
+     if (moreSelThree == 0){
+       COLOR = color(255,225,0);
+     }
+     else if (moreSelThree == 1){
+       COLOR = color(0,0,225);
+     }
+     else if (moreSelThree == 2){
+       COLOR = color(255,0,0);
+     }
+     else if (moreSelThree == 3){
+       COLOR = color(165,42,42);
+     }
+     else if (moreSelThree == 4){
+       COLOR = color(0,0,0);
+     }
+  }
   
+  /*    imgLock.resize(15, 15);
+    image(imgLock, ICON_OFFSET + 585, 562);*/
+    
+  if ((mouseX > ICON_OFFSET+585) && (mouseX < ICON_OFFSET+585 +15) && (mouseY > 562) && (mouseY < 562+15)){
+     mainMirror.lock.ScreenLocked = 1; 
+  }
+println(moreSelThree);  
 }
