@@ -1,8 +1,8 @@
 
 // mirror size information
 Mirror mainMirror;
-int MIRROR_WIDTH = 1280;
-int MIRROR_HEIGHT = 700;
+int MIRROR_WIDTH = 2732;
+int MIRROR_HEIGHT = 1536;
 
 // icon size information
 int ICON_OFFSET = MIRROR_WIDTH/4;
@@ -31,9 +31,10 @@ int[][] ACCESSABLE_BUTTONS_ON_WINDOW = {
   {ICON_OFFSET+ICON_SIZE*3, MIRROR_HEIGHT/8*6 + ICON_SIZE}, // health
   {ICON_OFFSET+ICON_SIZE*4, MIRROR_HEIGHT/8*6 + ICON_SIZE}, // media
   // three in app icons 
-  {ICON_OFFSET+ICON_SIZE*2, MIRROR_HEIGHT/8*5 + ICON_SIZE}, // app icon 1
-  {ICON_OFFSET+ICON_SIZE*3, MIRROR_HEIGHT/8*5 + ICON_SIZE}, // app icon 2
-  {ICON_OFFSET+ICON_SIZE*4, MIRROR_HEIGHT/8*5 + ICON_SIZE}, // app icon 3
+  
+  {ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8*5+ICON_SIZE/2 + ICON_SIZE}, // app icon 1
+  {ICON_OFFSET+ICON_SIZE*3-ICON_SIZE/2, MIRROR_HEIGHT/8*5+ICON_SIZE/2 + ICON_SIZE}, // app icon 2
+  {ICON_OFFSET+ICON_SIZE*4, MIRROR_HEIGHT/8*5+ICON_SIZE/2 + ICON_SIZE}, // app icon 3
   
 
   // music player backtrack, playpause and forward
@@ -51,8 +52,8 @@ int[][] ACCESSABLE_BUTTONS_ON_WINDOW = {
 void setup(){
   mainMirror = new Mirror();
 
-  size(1280, 700);
-  background(230);
+  size(MIRROR_WIDTH, MIRROR_HEIGHT);
+  background(224, 255, 255);
 }
 
 void draw() {
@@ -63,8 +64,10 @@ void mouseReleased() {
   boolean hitSomeButton = false;
 
   for (int loopCounter=0; loopCounter < ACCESSABLE_BUTTONS_ON_WINDOW.length; loopCounter++){
-      if ((mouseX > ACCESSABLE_BUTTONS_ON_WINDOW[loopCounter][0]) && (mouseX < ACCESSABLE_BUTTONS_ON_WINDOW[loopCounter][0]+BUTTONX)
-      && (mouseY > ACCESSABLE_BUTTONS_ON_WINDOW[loopCounter][1]) && (mouseY < ACCESSABLE_BUTTONS_ON_WINDOW[loopCounter][1]+BUTTONY)){
+      if ((mouseX > ACCESSABLE_BUTTONS_ON_WINDOW[loopCounter][0]) 
+      && (mouseX < ACCESSABLE_BUTTONS_ON_WINDOW[loopCounter][0]+BUTTONX)
+      && (mouseY > ACCESSABLE_BUTTONS_ON_WINDOW[loopCounter][1]) 
+      && (mouseY < ACCESSABLE_BUTTONS_ON_WINDOW[loopCounter][1]+BUTTONY)){
         
 
         if (loopCounter == 0) {
@@ -129,6 +132,7 @@ void mouseReleased() {
       } 
 
       else {
+        //println("rrrrrrr");
       }
       
       
@@ -137,6 +141,8 @@ void mouseReleased() {
   if (!hitSomeButton) {
     
         ON_WINDOW = -1;
+        println("rrrrrrr");
+        mainMirror.apps.unclicked(mouseX, mouseY);
   }
 }
 
@@ -178,6 +184,8 @@ class Apps{
   ImageButton health;
   ImageButton media;
 
+  boolean clickedOnWindow;
+
   int onMainIcon = -1;
   int onSubIcon = 0;
 
@@ -194,16 +202,20 @@ class Apps{
   }
 
   void setupMainIcons() {
-    PImage iconImage = loadImage("power.jpg");
+    PImage iconImage = loadImage("images/weather_icon.png");
+    iconImage.resize(50, 50);
     weather = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8*6 + ICON_SIZE, iconImage, "weather");
 
-    iconImage = loadImage("power.jpg");
+    iconImage = loadImage("images/calendar_icon.png");
+    //iconImage.resize(10, 0);
     calendar = new ImageButton(ICON_OFFSET+ICON_SIZE*2, MIRROR_HEIGHT/8*6 + ICON_SIZE, iconImage, "calendar");
 
-    iconImage = loadImage("power.jpg");
+    iconImage = loadImage("images/health_icon.png");
+    //iconImage.resize(10, 0);
     health = new ImageButton(ICON_OFFSET+ICON_SIZE*3, MIRROR_HEIGHT/8*6 + ICON_SIZE, iconImage, "health");
 
-    iconImage = loadImage("power.jpg");
+    iconImage = loadImage("images/social_media.png");
+    //iconImage.resize(10, 0);
     media = new ImageButton(ICON_OFFSET+ICON_SIZE*4, MIRROR_HEIGHT/8*6 + ICON_SIZE, iconImage, "media");
   }
 
@@ -212,60 +224,48 @@ class Apps{
 
     // weather
 
-    PImage appImage = loadImage("english.jpg");
-    englishWindow[0][0] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 5, appImage, "weatherWindow");
+    PImage appImage = loadImage("images/weather_window.png");
+    englishWindow[0][0] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2, appImage, "weatherWindow");
 
-    appImage = loadImage("english.jpg");
-    englishWindow[0][1] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 5, appImage, "calendarWindow");
+    appImage = loadImage("images/weather_window.png");
+    englishWindow[0][1] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2, appImage, "calendarWindow");
     
-    appImage = loadImage("english.jpg");
-    englishWindow[0][2] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 5, appImage, "healthWindow");
+    appImage = loadImage("images/weather_window.png");
+    englishWindow[0][2] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2, appImage, "healthWindow");
     
-    appImage = loadImage("english.jpg");
-    englishWindow[0][3] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 5, appImage, "mediaWindow");
-
     // calendar
 
-    appImage = loadImage("english.jpg");
-    englishWindow[1][0] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 5, appImage, "weatherWindow");
+    appImage = loadImage("images/calendar_window.png");
+    englishWindow[1][0] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2, appImage, "weatherWindow");
 
-    appImage = loadImage("english.jpg");
-    englishWindow[1][1] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 5, appImage, "calendarWindow");
+    appImage = loadImage("images/calendar_window.png");
+    englishWindow[1][1] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2, appImage, "calendarWindow");
     
-    appImage = loadImage("english.jpg");
-    englishWindow[1][2] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 5, appImage, "healthWindow");
+    appImage = loadImage("images/calendar_window.png");
+    englishWindow[1][2] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2, appImage, "healthWindow");
     
-    appImage = loadImage("english.jpg");
-    englishWindow[1][3] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 5, appImage, "mediaWindow");
-
     // health
     
-    appImage = loadImage("english.jpg");
-    englishWindow[2][0] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 5, appImage, "weatherWindow");
+    appImage = loadImage("images/steps_window.png");
+    englishWindow[2][0] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2, appImage, "weatherWindow");
 
-    appImage = loadImage("english.jpg");
-    englishWindow[2][1] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 5, appImage, "calendarWindow");
+    appImage = loadImage("images/sleep_window.png");
+    englishWindow[2][1] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2, appImage, "calendarWindow");
     
-    appImage = loadImage("english.jpg");
-    englishWindow[2][2] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 5, appImage, "healthWindow");
+    appImage = loadImage("images/weight_window.png");
+    englishWindow[2][2] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2, appImage, "healthWindow");
     
-    appImage = loadImage("english.jpg");
-    englishWindow[2][3] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 5, appImage, "mediaWindow");
-
     // media
 
-    appImage = loadImage("english.jpg");
-    englishWindow[3][0] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 5, appImage, "weatherWindow");
+    appImage = loadImage("images/social_media_fb.png");
+    englishWindow[3][0] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2, appImage, "weatherWindow");
 
-    appImage = loadImage("english.jpg");
-    englishWindow[3][1] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 5, appImage, "calendarWindow");
+    appImage = loadImage("images/social_media_YT.png");
+    englishWindow[3][1] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2, appImage, "calendarWindow");
     
-    appImage = loadImage("english.jpg");
-    englishWindow[3][2] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 5, appImage, "healthWindow");
+    appImage = loadImage("images/social_media_rss.png");
+    englishWindow[3][2] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2, appImage, "healthWindow");
     
-    appImage = loadImage("english.jpg");
-    englishWindow[3][3] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 5, appImage, "mediaWindow");
-
 
   }
 
@@ -274,60 +274,59 @@ class Apps{
 
     // weather
 
-    PImage appImage = loadImage("chinese.jpg");
-    chineseWindow[0][0] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 5, appImage, "weatherWindow");
+    PImage appImage = loadImage("images/weather_window.png");
+    chineseWindow[0][0] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2, appImage, "weatherWindow");
 
-    appImage = loadImage("chinese.jpg");
-    chineseWindow[0][1] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 5, appImage, "calendarWindow");
+    appImage = loadImage("images/weather_window.png");
+    chineseWindow[0][1] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2, appImage, "calendarWindow");
     
-    appImage = loadImage("chinese.jpg");
-    chineseWindow[0][2] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 5, appImage, "healthWindow");
+    appImage = loadImage("images/weather_window.png");
+    chineseWindow[0][2] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2, appImage, "healthWindow");
     
-    appImage = loadImage("chinese.jpg");
-    chineseWindow[0][3] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 5, appImage, "mediaWindow");
-
     // calendar
 
-    appImage = loadImage("chinese.jpg");
-    chineseWindow[1][0] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 5, appImage, "weatherWindow");
+    appImage = loadImage("images/calendar_window.png");
+    chineseWindow[1][0] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2, appImage, "weatherWindow");
 
-    appImage = loadImage("chinese.jpg");
-    chineseWindow[1][1] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 5, appImage, "calendarWindow");
+    appImage = loadImage("images/calendar_window.png");
+    chineseWindow[1][1] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2, appImage, "calendarWindow");
     
-    appImage = loadImage("chinese.jpg");
-    chineseWindow[1][2] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 5, appImage, "healthWindow");
+    appImage = loadImage("images/calendar_window.png");
+    chineseWindow[1][2] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2, appImage, "healthWindow");
     
-    appImage = loadImage("chinese.jpg");
-    chineseWindow[1][3] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 5, appImage, "mediaWindow");
-
     // health
     
-    appImage = loadImage("chinese.jpg");
-    chineseWindow[2][0] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 5, appImage, "weatherWindow");
+    appImage = loadImage("images/steps_window.png");
+    chineseWindow[2][0] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2, appImage, "weatherWindow");
 
-    appImage = loadImage("chinese.jpg");
-    chineseWindow[2][1] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 5, appImage, "calendarWindow");
+    appImage = loadImage("images/sleep_window.png");
+    chineseWindow[2][1] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2, appImage, "calendarWindow");
     
-    appImage = loadImage("chinese.jpg");
-    chineseWindow[2][2] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 5, appImage, "healthWindow");
+    appImage = loadImage("images/weight_window.png");
+    chineseWindow[2][2] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2, appImage, "healthWindow");
     
-    appImage = loadImage("chinese.jpg");
-    chineseWindow[2][3] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 5, appImage, "mediaWindow");
-
     // media
 
-    appImage = loadImage("chinese.jpg");
-    chineseWindow[3][0] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 5, appImage, "weatherWindow");
+    appImage = loadImage("images/social_media_fb.png");
+    chineseWindow[3][0] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2, appImage, "weatherWindow");
 
-    appImage = loadImage("chinese.jpg");
-    chineseWindow[3][1] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 5, appImage, "calendarWindow");
+    appImage = loadImage("images/social_media_YT.png");
+    chineseWindow[3][1] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2, appImage, "calendarWindow");
     
-    appImage = loadImage("chinese.jpg");
-    chineseWindow[3][2] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 5, appImage, "healthWindow");
+    appImage = loadImage("images/social_media_rss.png");
+    chineseWindow[3][2] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2, appImage, "healthWindow");
     
-    appImage = loadImage("chinese.jpg");
-    chineseWindow[3][3] = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 5, appImage, "mediaWindow");
 
+  }
+
+  void unclicked(int mouseX, int mouseY) {
+    if (ICON_OFFSET+ICON_SIZE*1 < mouseX && mouseX < ICON_OFFSET+ICON_SIZE*1 + ICON_SIZE*4
+     && MIRROR_HEIGHT/8*3+ICON_SIZE/2 < mouseY && mouseY < MIRROR_HEIGHT/8*3+ICON_SIZE*5+ICON_SIZE/2) {    
+      clickedOnWindow = true;
+    println("hhhhhh");
+    } else {
+      clickedOnWindow = false;
+    }
   }
 
   // event handler
@@ -335,25 +334,49 @@ class Apps{
     switch (clickedIndex) {
       case 0 :
         println("weather");
-        onMainIcon = 0;
+        
+        if (onMainIcon == 0) {
+          onMainIcon = -1;
+        } else {
+          onMainIcon = 0;
+        }
+
         onSubIcon = 0;
       break;
 
       case 1 :
         println("calendar");
-        onMainIcon = 1;
+        
+        if (onMainIcon == 1) {
+          onMainIcon = -1;
+        } else {
+          onMainIcon = 1;
+        }
+
         onSubIcon = 0;
       break;
 
       case 2 :
         println("health");
-        onMainIcon = 2;
+        
+        if (onMainIcon == 2) {
+          onMainIcon = -1;
+        } else {
+          onMainIcon = 2;
+        }
+        
         onSubIcon = 0;
       break;
 
       case 3 :
         println("media");
-        onMainIcon = 3;
+        
+        if (onMainIcon == 3) {
+          onMainIcon = -1;
+        } else {
+          onMainIcon = 3;
+        }
+        
         onSubIcon = 0;
       break;
 
@@ -383,7 +406,7 @@ class Apps{
     health.display();
     media.display();
 
-    if (0 <= ON_WINDOW && ON_WINDOW <= 6 && onMainIcon != -1) {
+    if (0 <= ON_WINDOW && ON_WINDOW <= 6 && onMainIcon != -1 || clickedOnWindow && onMainIcon != -1) {
       switch (COLOR) {
         case BLACK:
           fill(0);
@@ -408,9 +431,10 @@ class Apps{
         default:
           fill(0);
 
+
       }
-      rect(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8*4, // x and y
-      ICON_SIZE*4, ICON_SIZE*4,                        // width and height
+      rect(ICON_OFFSET+ICON_SIZE*1-2, MIRROR_HEIGHT/8*3-2+ICON_SIZE/2, // x and y
+      ICON_SIZE*4, ICON_SIZE*5,                        // width and height
       7);;         
       
       if (LANGUAGE == ENGLISH) {
@@ -420,9 +444,9 @@ class Apps{
       }
     } else {
       onMainIcon = -1;
-      fill(250);
-      rect(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8*4, // x and y
-      ICON_SIZE*4, ICON_SIZE*4,                        // width and height
+      fill(224, 255, 255);
+      rect(ICON_OFFSET+ICON_SIZE*1-3, MIRROR_HEIGHT/8*3-3+ICON_SIZE/2, // x and y
+      ICON_SIZE*4+6, ICON_SIZE*5+6,                        // width and height
       7);;                                             // roundness
     }
 
