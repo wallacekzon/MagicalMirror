@@ -531,6 +531,14 @@ class MusicPlayer {
   ImageButton songList;
 
   SongListWindow songListWindow;
+  double music_x = ICON_OFFSET+ICON_SIZE* 6;
+  double music_y = MIRROR_HEIGHT/8*6 + ICON_SIZE;
+  double width = ICON_SIZE * 5;
+  double height = ICON_SIZE;
+  PImage playButton = loadImage("images/playButton.png");
+  PImage prevButton = loadImage("images/prevButton.png");
+  PImage forwardButton = loadImage("images/forwardButton.png");
+  
 
   MusicPlayer() {
     songListWindow = new SongListWindow();
@@ -538,6 +546,12 @@ class MusicPlayer {
 
   void draw() {
     songListWindow.draw();
+    rect(music_x, music_y, width, height, 20);
+
+    image(playButton, music_x + ICON_SIZE / 2, music_y, ICON_SIZE, ICON_SIZE);
+    image(prevButton, music_x + ICON_SIZE / 4 , music_y + ICON_SIZE / 4, ICON_SIZE / 4 , ICON_SIZE / 4);
+    image(forwardButton, music_x + ICON_SIZE + ICON_SIZE / 4, music_y + ICON_SIZE / 4, ICON_SIZE / 4, ICON_SIZE / 4);
+  
   }
 }
 
