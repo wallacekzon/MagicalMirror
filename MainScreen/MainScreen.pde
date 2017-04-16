@@ -15,7 +15,7 @@ int moreButtonLength = 0;
 int GUEST = 0, screenLocked = 0, ACC_IDENT = 0, FINGER = 0, PASSCODE = 0;
 
 int moreTemp = 0, moreRepos = 1, moreColor = 4, moreAcc = 0;
-int moreLang = 0, initDumb = 0, INITIALIZATION = 0;
+int moreLang = 0, initDumb = 0, INITIALIZATION = 1;
 int arrowHeight = 0, arrowWidth = 0, initFingerDone = 0, initPasscodeDone = 0;
 int initLang = 1, initWifi = 0, initPassw = 0, initWifiSel = 0, initAccount = 0, initSecurity = 0, initFinger = 0, initPasscode;
 String wifiNetwork, initWifiPassword="", initAccountName = "", initAccountPassword = "", initAccountDumb = "Wallace", initUserPasscode = "";
