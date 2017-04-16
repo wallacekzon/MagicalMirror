@@ -15,7 +15,7 @@ int moreButtonLength = 0;
 int GUEST = 0, screenLocked = 0, ACC_IDENT = 0, FINGER = 0, PASSCODE = 0;
 
 int moreTemp = 0, moreRepos = 1, moreColor = 4, moreAcc = 0;
-int moreLang = 0, initDumb = 0, INITIALIZATION = 1;
+int moreLang = 0, initDumb = 0, INITIALIZATION = 0;
 int arrowHeight = 0, arrowWidth = 0, initFingerDone = 0, initPasscodeDone = 0;
 int initLang = 1, initWifi = 0, initPassw = 0, initWifiSel = 0, initAccount = 0, initSecurity = 0, initFinger = 0, initPasscode;
 String wifiNetwork, initWifiPassword="", initAccountName = "", initAccountPassword = "", initAccountDumb = "Wallace", initUserPasscode = "";
@@ -24,7 +24,7 @@ int buttonsMore[][] = {{1138, 1092-buttonY*2}, {1138, 1092 - buttonY}, {1138, 10
 int buttonsMoreSet[][] = {{1138, 1092-buttonY*4}, {1138, 1092-buttonY*3}, {1138, 1092-buttonY*2}, {1138, 1092-buttonY}, {1138, 1092}};
 int buttonsMoreAcc[][] = {{1138, 1092-buttonY*3}, {1138, 1092-buttonY*2}, {1138, 1092-buttonY}, {1138, 1092}};
 int buttonsMoreSet1[][] = {{1138, 1092-buttonY*2}, {1138, 1092-buttonY}, {1138, 1092}};//Temperature
-int buttonsMoreSet2[][] = {{1138, 1092-buttonY*2}, {1138, 1092-buttonY}, {1138, 1092}};//Language
+int buttonsMoreSet2[][] = {{1138, 1092-buttonY*10}, {1138, 1092-buttonY*9}, {1138, 1092-buttonY*8}, {1138, 1092-buttonY*7}, {1138, 1092-buttonY*6}, {1138, 1092-buttonY*5}, {1138, 1092-buttonY*4}, {1138, 1092-buttonY*3}, {1138, 1092-buttonY*2}, {1138, 1092-buttonY}, {1138, 1092}};//Language
 int buttonsMoreSet3[][] = {{1138, 1092-buttonY*3}, {1138, 1092-buttonY*2}, {1138, 1092-buttonY}, {1138, 1092}};//Reposition
 int buttonsMoreSet4[][] = {{1138, 1092-buttonY*5}, {1138, 1092-buttonY*4}, {1138, 1092-buttonY*3}, {1138, 1092-buttonY*2}, {1138, 1092-buttonY}, {1138, 1092}};//Color Scheme
 
@@ -76,8 +76,10 @@ void draw(){
   font = createFont("Arial",80,true);
   textFont(font);
   
-  if (LANGUAGE == "RU")
+  if (LANGUAGE == "RU"){
     text("Добро пожаловать в Illuminati",830,450);
+    moreLang = 1; 
+  }
   else
     text("Welcome to Illuminati",1000,450);
     
@@ -388,8 +390,16 @@ class More {
     labels121[2]=LANGUAGE.equals("RU") ? "Температура" : "Temperature";
     
     labels122[0]="English";
-    labels122[1]="Русский";
-    labels122[2]=LANGUAGE.equals("RU") ? "Язык" : "Languages";
+    labels122[1]="Deutsch";
+    labels122[2]="Français";
+    labels122[3]="Magyar";
+    labels122[4]="Polski";
+    labels122[5]="Português";
+    labels122[6]="Русский";
+    labels122[7]="Svenska";
+    labels122[8]="Türkçe";
+    labels122[9]="Zazaki";
+    labels122[10]=LANGUAGE.equals("RU") ? "Язык" : "Languages";
     
     labels123[0]=LANGUAGE.equals("RU") ? "Слева" : "Left";
     labels123[1]=LANGUAGE.equals("RU") ? "Центр" : "Center";
@@ -615,9 +625,17 @@ class More {
             font = createFont("Arial",20,true);
             textFont(font);
 
-            text(labels122[0],ICON_OFFSET+1138+60,972+buttonY*0.67);
-            text(labels122[1],ICON_OFFSET+1138+60,1032+buttonY*0.67);
-            text(labels122[2],ICON_OFFSET+1138+60,1092+buttonY*0.67);
+            text(labels122[0],ICON_OFFSET+1138+60,492+buttonY*0.67);
+            text(labels122[1],ICON_OFFSET+1138+60,552+buttonY*0.67);
+            text(labels122[2],ICON_OFFSET+1138+60,612+buttonY*0.67);
+            text(labels122[3],ICON_OFFSET+1138+60,672+buttonY*0.67);
+            text(labels122[4],ICON_OFFSET+1138+60,732+buttonY*0.67);
+            text(labels122[5],ICON_OFFSET+1138+60,792+buttonY*0.67);
+            text(labels122[6],ICON_OFFSET+1138+60,852+buttonY*0.67);
+            text(labels122[7],ICON_OFFSET+1138+60,912+buttonY*0.67);
+            text(labels122[8],ICON_OFFSET+1138+60,972+buttonY*0.67);
+            text(labels122[9],ICON_OFFSET+1138+60,1032+buttonY*0.67);
+            text(labels122[10],ICON_OFFSET+1138+60,1092+buttonY*0.67);
             
             fill(COLOR);
             font = createFont("Arial",30,true);
@@ -633,12 +651,76 @@ class More {
             if(moreLang == 0){
               strokeWeight(4);
               stroke(COLOR);
+              line(ICON_OFFSET + 1148, 522, ICON_OFFSET + 1188, 522);
+              line(ICON_OFFSET + 1178, 512, ICON_OFFSET + 1188, 522);
+              line(ICON_OFFSET + 1178, 532, ICON_OFFSET + 1188, 522);
+              strokeWeight(0);
+            }
+            else if(moreLang == 1){
+              strokeWeight(4);
+              stroke(COLOR);
+              line(ICON_OFFSET + 1148, 582, ICON_OFFSET + 1188, 582);
+              line(ICON_OFFSET + 1178, 572, ICON_OFFSET + 1188, 582);
+              line(ICON_OFFSET + 1178, 592, ICON_OFFSET + 1188, 582);
+              strokeWeight(0);
+            }
+            else if(moreLang == 2){
+              strokeWeight(4);
+              stroke(COLOR);
+              line(ICON_OFFSET + 1148, 642, ICON_OFFSET + 1188, 642);
+              line(ICON_OFFSET + 1178, 632, ICON_OFFSET + 1188, 642);
+              line(ICON_OFFSET + 1178, 652, ICON_OFFSET + 1188, 642);
+              strokeWeight(0);
+            }
+            else if(moreLang == 3){
+              strokeWeight(4);
+              stroke(COLOR);
+              line(ICON_OFFSET + 1148, 702, ICON_OFFSET + 1188, 702);
+              line(ICON_OFFSET + 1178, 692, ICON_OFFSET + 1188, 702);
+              line(ICON_OFFSET + 1178, 712, ICON_OFFSET + 1188, 702);
+              strokeWeight(0);
+            }
+            else if(moreLang == 4){
+              strokeWeight(4);
+              stroke(COLOR);
+              line(ICON_OFFSET + 1148, 762, ICON_OFFSET + 1188, 762);
+              line(ICON_OFFSET + 1178, 752, ICON_OFFSET + 1188, 762);
+              line(ICON_OFFSET + 1178, 772, ICON_OFFSET + 1188, 762);
+              strokeWeight(0);
+            }
+            else if(moreLang == 5){
+              strokeWeight(4);
+              stroke(COLOR);
+              line(ICON_OFFSET + 1148, 822, ICON_OFFSET + 1188, 822);
+              line(ICON_OFFSET + 1178, 812, ICON_OFFSET + 1188, 822);
+              line(ICON_OFFSET + 1178, 832, ICON_OFFSET + 1188, 822);
+              strokeWeight(0);
+            }
+            else if(moreLang == 6){
+              strokeWeight(4);
+              stroke(COLOR);
+              line(ICON_OFFSET + 1148, 882, ICON_OFFSET + 1188, 882);
+              line(ICON_OFFSET + 1178, 872, ICON_OFFSET + 1188, 882);
+              line(ICON_OFFSET + 1178, 892, ICON_OFFSET + 1188, 882);
+              strokeWeight(0);
+            }
+            else if(moreLang == 7){
+              strokeWeight(4);
+              stroke(COLOR);
+              line(ICON_OFFSET + 1148, 942, ICON_OFFSET + 1188, 942);
+              line(ICON_OFFSET + 1178, 932, ICON_OFFSET + 1188, 942);
+              line(ICON_OFFSET + 1178, 952, ICON_OFFSET + 1188, 942);
+              strokeWeight(0);
+            }
+            else if(moreLang == 8){
+              strokeWeight(4);
+              stroke(COLOR);
               line(ICON_OFFSET + 1148, 1002, ICON_OFFSET + 1188, 1002);
               line(ICON_OFFSET + 1178, 992, ICON_OFFSET + 1188, 1002);
               line(ICON_OFFSET + 1178, 1012, ICON_OFFSET + 1188, 1002);
               strokeWeight(0);
             }
-            else if(moreLang == 1){
+            else if(moreLang == 9){
               strokeWeight(4);
               stroke(COLOR);
               line(ICON_OFFSET + 1148, 1062, ICON_OFFSET + 1188, 1062);
@@ -742,22 +824,25 @@ class More {
             text(user,ICON_OFFSET+1138+40,1212);
             triangle(ICON_OFFSET+1138, 1206, ICON_OFFSET+1138+15, 1206-15, ICON_OFFSET+1138+30, 1206);
             
+            strokeWeight(0);
+            stroke(255,255,255);
+            
             fill(255,225,0);
-            rect(ICON_OFFSET+500+35,321,10,10);
+            rect(ICON_OFFSET+1143,792+5,50,50);
             fill(0,0,225);
-            rect(ICON_OFFSET+500+35,361,10,10);
+            rect(ICON_OFFSET+1143,852+5,50,50);
             fill(225,0,0);
-            rect(ICON_OFFSET+500+35,401,10,10);
+            rect(ICON_OFFSET+1143,912+5,50,50);
             fill(165,42,42);
-            rect(ICON_OFFSET+500+35,441,10,10);
+            rect(ICON_OFFSET+1143,972+5,50,50);
             fill(0,0,0);
-            rect(ICON_OFFSET+500+35,481,10,10);
+            rect(ICON_OFFSET+1143,1032+5,50,50);
             
             imgLock.resize(30, 30);
             image(imgLock, ICON_OFFSET + 1345, 1185);
             
             moreButtonLength = buttonsMoreSet4.length;
-            
+            /*
             if(moreColor == 0){
               strokeWeight(4);
               stroke(COLOR);
@@ -797,7 +882,7 @@ class More {
               line(ICON_OFFSET + 1178, 1052, ICON_OFFSET + 1188, 1062);
               line(ICON_OFFSET + 1178, 1072, ICON_OFFSET + 1188, 1062);
               strokeWeight(0);
-            }
+            }*/
 
               strokeWeight(4);
               stroke(COLOR);
@@ -872,12 +957,12 @@ class InfoTime {
      }else{
        time = hours + ":" + mins + " PM";
      }
-     
+     fill(0);
      text(time,120,60);
   }
 
   void draw() {
-     
+     println(time);
      fill(0);
      text(time,100,100);
   }
@@ -1289,6 +1374,30 @@ void mouseReleased(){
       }
       else if (moreSelThree == 1){
         moreLang = 1;
+      }
+      else if (moreSelThree == 2){
+        moreLang = 2;
+      }
+      else if (moreSelThree == 3){
+        moreLang = 3;
+      }
+      else if (moreSelThree == 4){
+        moreLang = 4;
+      }
+      else if (moreSelThree == 5){
+        moreLang = 5;
+      }
+      else if (moreSelThree == 6){
+        moreLang = 6;
+      }
+      else if (moreSelThree == 7){
+        moreLang = 7;
+      }
+      else if (moreSelThree == 8){
+        moreLang = 8;
+      }
+      else if (moreSelThree == 9){
+        moreLang = 9;
       }
     }
     else if (moreSelTwo == 2){
