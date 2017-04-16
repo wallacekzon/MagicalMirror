@@ -15,7 +15,7 @@ int moreButtonLength = 0;
 int GUEST = 0, screenLocked = 0, ACC_IDENT = 0, FINGER = 0, PASSCODE = 0;
 
 int moreTemp = 0, moreRepos = 1, moreColor = 4, moreAcc = 0;
-int moreLang = 0, initDumb = 0, INITIALIZATION = 1;
+int moreLang = 0, initDumb = 0, INITIALIZATION = 0;
 int arrowHeight = 0, arrowWidth = 0, initFingerDone = 0, initPasscodeDone = 0;
 int initLang = 1, initWifi = 0, initPassw = 0, initWifiSel = 0, initAccount = 0, initSecurity = 0, initFinger = 0, initPasscode;
 String wifiNetwork, initWifiPassword="", initAccountName = "", initAccountPassword = "", initAccountDumb = "Wallace", initUserPasscode = "";
@@ -78,7 +78,6 @@ void draw(){
   
   if (LANGUAGE == "RU"){
     text("Добро пожаловать в Illuminati",830,450);
-    moreLang = 1; 
   }
   else
     text("Welcome to Illuminati",1000,450);
@@ -349,7 +348,6 @@ class Mirror {
 }
 
 class More {
-  MoreWindow window;
   String user = "Hi, Wallace!";
   //int[][] buttons = { {ICON_OFFSET+500, 426}, {ICON_OFFSET+500, 466}, {ICON_OFFSET+500, 506}};
   
@@ -385,8 +383,8 @@ class More {
     labels12[3]=LANGUAGE.equals("RU") ? "Цвет" : "Color";
     labels12[4]=LANGUAGE.equals("RU") ? "Настройки" : "Settings";
     
-    labels121[0]="C";
-    labels121[1]="F";
+    labels121[0]=str(char(176))+"C";
+    labels121[1]=str(char(176))+"F";
     labels121[2]=LANGUAGE.equals("RU") ? "Температура" : "Temperature";
     
     labels122[0]="English";
@@ -921,25 +919,12 @@ class MoreWindow {
 }
 
 class Info {
-  InfoTime infoTime;
-  InfoDate infoDate;
-
-  Info() {
-    InfoTime infoTime = new InfoTime();
-    InfoDate infoDate = new InfoDate();
-  }
-
-  void draw() {
-    
-   // infoTime.draw();
-  }
-}
-
-class InfoTime {
   int hours,minutes;
   String time;
-  
-  InfoTime() {
+  int day,month;
+  String date;
+
+  Info() {
     hours = hour();
     minutes = minute();  
     if (hour() > 12) {
@@ -950,39 +935,23 @@ class InfoTime {
      if (minutes < 10) {
       mins = "0" + mins;
      }
-     textSize(30);
      
      if(hours>12){
        time = hours + ":" + mins + " AM";
      }else{
        time = hours + ":" + mins + " PM";
      }
-     fill(0);
-     text(time,120,60);
+     
+  /*   day = day();
+     month = month();
+     date = month + "/" + day;*/
+     
   }
 
   void draw() {
-     println(time);
-     fill(0);
-     text(time,100,100);
-  }
-}
-
-class InfoDate {
-  
-  int day,month;
-  String date;
-  
-  InfoDate() {
-    
-    //day = day();
-    //month = month();
-    //date = month + "/" + day;
+    textSize(30);
+    text(time,ICON_OFFSET + 500,1300);
     //text(date,120,90);
-  }
-
-  void draw() {
-      
   }
 }
 
@@ -1001,6 +970,7 @@ void mouseReleased(){
     //setting up language variable
     if ((arrowHeight==70) && (arrowWidth==455) && (initLang == 1)){
       LANGUAGE = "RU";
+      moreLang = 6;
     }
     else if (initLang == 1){
       LANGUAGE = "EN";
@@ -1149,7 +1119,7 @@ void mouseReleased(){
     initSecurity = 1;
   }
   //press next from security
-  else if((initSecurity == 1) && (mouseX > 1870) && (mouseX < 1940) && (mouseY > 733) && (mouseY < 803)){
+  else if((initSecurity == 1) && (mouseX > 1870) && (mouseX < 1940) && (mouseY > 733) && (mouseY < 803) && ((initPasscodeDone == 1) || (initPasscodeDone == 1))){
     initSecurity = 0;
     INITIALIZATION = 0;
   }
@@ -1323,11 +1293,11 @@ void mouseReleased(){
   //language
   if ((moreLevel3 == true) && (moreSelTwo == 1)){
      
-    if (moreSelThree == 0){
-       LANGUAGE = "EN";
-    }
-    else if (moreSelThree == 1){
+    if (moreSelThree == 6){
        LANGUAGE = "RU";
+    }
+    else{
+      LANGUAGE = "EN";
     }
   }
 
@@ -1351,7 +1321,7 @@ void mouseReleased(){
   }
   
   //check whether lockscreen is selected  
-  if ((mouseX > ICON_OFFSET+585) && (mouseX < ICON_OFFSET+585 +15) && (mouseY > 562) && (mouseY < 562+15)){
+  if ((mouseX > ICON_OFFSET+1345) && (mouseX < ICON_OFFSET+1345+20) && (mouseY > 1162) && (mouseY < 1162+50)){
      screenLocked = 1; 
   }
   
@@ -1449,5 +1419,5 @@ void mouseReleased(){
       ACC_IDENT = 1;
     }
   }
- // println(moreSelOne,mouseY);
+  println(screenLocked,mouseY);
 }
