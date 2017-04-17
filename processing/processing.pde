@@ -1,6 +1,7 @@
-
+import processing.sound.*;
 // mirror size information
 Mirror mainMirror;
+
 int MIRROR_WIDTH = 2732;
 int MIRROR_HEIGHT = 1536;
 
@@ -62,6 +63,7 @@ void draw() {
 
 void mouseReleased() {
   boolean hitSomeButton = false;
+  mainMirror.musicPlayer.clicked();
 
   for (int loopCounter=0; loopCounter < ACCESSABLE_BUTTONS_ON_WINDOW.length; loopCounter++){
       if ((mouseX > ACCESSABLE_BUTTONS_ON_WINDOW[loopCounter][0]) 
@@ -164,6 +166,7 @@ class Mirror {
   }
 
   void draw() {
+  	background(); //ADDED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!@REWR$WER$#%FDSGREHGFDHFGHFGHFHGFHFGHGFHFGHGFHGFH
     apps.draw();
     musicPlayer.draw();
     more.draw();
@@ -531,28 +534,104 @@ class MusicPlayer {
   ImageButton songList;
 
   SongListWindow songListWindow;
-  double music_x = ICON_OFFSET+ICON_SIZE* 6;
+  double music_x = ICON_OFFSET+ICON_SIZE* 5;
   double music_y = MIRROR_HEIGHT/8*6 + ICON_SIZE;
   double width = ICON_SIZE * 5;
   double height = ICON_SIZE;
-  PImage playButton = loadImage("images/playButton.png");
-  PImage prevButton = loadImage("images/prevButton.png");
-  PImage forwardButton = loadImage("images/forwardButton.png");
+  PImage playButton = loadImage("images/playerMainButtons.png");
+  PImage pauseButton = loadImage("images/pauseButton.png");
+  boolean paused = true;
+  Audio audio = new Audio();
+
+  double lineBeginX = music_x + ICON_SIZE * 1.5;
+  double lineBeginY = music_y + ICON_SIZE / 2;
+  double lineEndX = lineBeginX + 2 * ICON_SIZE;
+  double lineLength = lineEndX - lineBeginX;
+  double songPoint = lineBeginX;
+  double playLocation = music_x + ICON_SIZE / 4;
+  String[] musicList = {"1.mp3", "2.mp3", "3.mp3", "4.mp3", "5.mp3"};
+  String[] musicName = {"Emancipator - Minor Cause", "Emancipator - 2","Emancipator - 3","Emancipator - 4","Emancipator - 5"};
+  int numTracks = 5;
+  int songIndex = 0;
+  // PImage prevButton = loadImage("images/prevButton.png");
+  // PImage forwardButton = loadImage("images/forwardButton.png");
   
 
   MusicPlayer() {
     songListWindow = new SongListWindow();
+    loadSong(songIndex);
+  }
+
+  void loadSong(int index){
+  	audio.setAttribute("src",musicList[index]);
   }
 
   void draw() {
     songListWindow.draw();
+    fill(255, 255, 255);
     rect(music_x, music_y, width, height, 20);
 
-    image(playButton, music_x + ICON_SIZE / 2, music_y, ICON_SIZE, ICON_SIZE);
-    image(prevButton, music_x + ICON_SIZE / 4 , music_y + ICON_SIZE / 4, ICON_SIZE / 4 , ICON_SIZE / 4);
-    image(forwardButton, music_x + ICON_SIZE + ICON_SIZE / 4, music_y + ICON_SIZE / 4, ICON_SIZE / 4, ICON_SIZE / 4);
+    println(audio.currentTime + " " + audio.duration);
+    double percent;
+    if(audio.currentTime <= 0){
+    	percent = 0;
+    }else{
+    	percent = audio.currentTime / audio.duration;
+    }
+    songPoint = (lineLength * percent) + lineBeginX;
+
+    line(lineBeginX,lineBeginY, lineEndX ,lineBeginY);
+    ellipse(songPoint, lineBeginY, ICON_SIZE / 8, ICON_SIZE / 8);
+
+    fill(0, 0, 0);
+	text(musicName[songIndex], lineBeginX, music_y + ICON_SIZE / 4);
+    if(paused){
+    	image(playButton, playLocation, music_y, ICON_SIZE, ICON_SIZE);    	
+    }else{
+		image(pauseButton, playLocation, music_y, ICON_SIZE, ICON_SIZE);
+    }
+
+    
+    //image(prevButton, music_x + ICON_SIZE / 4 , music_y + ICON_SIZE / 3, ICON_SIZE / 4 , ICON_SIZE / 4);
+    //image(forwardButton, music_x + ICON_SIZE + ICON_SIZE / 4, music_y + ICON_SIZE / 3, ICON_SIZE / 4, ICON_SIZE / 4);
   
   }
+  
+  void clicked() {
+  	//play and pause
+  	if ((mouseX > playLocation + ICON_SIZE / 3) && (mouseX < playLocation + (ICON_SIZE * (2 / 3))) && (mouseY > music_y  + ICON_SIZE / 3) && (mouseY < (ICON_SIZE * (2 / 3)) + music_y)){
+  		paused ^= true;
+    }
+
+    //back button
+  	if ((mouseX > playLocation) && (mouseX < playLocation + ICON_SIZE / 3) && (mouseY > music_y  + ICON_SIZE / 3) && (mouseY < (ICON_SIZE * (2 / 3)) + music_y)){
+  		if(audio.currentTime < 2 && songIndex > 0){
+  			loadSong(--songIndex);
+  		}else{
+  			audio.currentTime = 0;
+  		}
+    }
+
+  	if ((mouseX > playLocation + (ICON_SIZE * (2 / 3))) && (mouseX < playLocation + ICON_SIZE) && (mouseY > music_y  + ICON_SIZE / 3) && (mouseY < (ICON_SIZE * (2 / 3)) + music_y)){
+  		if(songIndex < numTracks - 1){
+  			loadSong(++songIndex);
+  		}
+    }    
+
+    if ((mouseX > lineBeginX) && (mouseX < lineEndX) && (mouseY > lineBeginY - 5) && (mouseY < lineBeginY + 5)){
+    	double currentPoint = (mouseX - lineBeginX) / lineLength;
+  		audio.currentTime = audio.duration * currentPoint;
+    }
+
+  	if(paused){
+  		audio.pause();
+  	} else{
+  		audio.play();
+  	}
+  	
+  }
+
+
 }
 
 class SongListWindow {
