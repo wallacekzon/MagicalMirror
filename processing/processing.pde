@@ -541,7 +541,7 @@ class MusicPlayer {
   double music_x = ICON_OFFSET+ICON_SIZE* 5;
   double music_y = MIRROR_HEIGHT/8*6 + ICON_SIZE;
   double width = ICON_SIZE * 5;
-  double height = ICON_SIZE;
+  double height = ICON_SIZE * .88;
   PImage playButton = loadImage("images/playerMainButtons.png");
   PImage pauseButton = loadImage("images/pauseButton.png");
   boolean paused = true;
@@ -554,7 +554,7 @@ class MusicPlayer {
   double songPoint = lineBeginX;
   double playLocation = music_x + ICON_SIZE / 4;
   String[] musicList = {"1.mp3", "2.mp3", "3.mp3", "4.mp3", "5.mp3"};
-  String[] musicName = {"Emancipator - Minor Cause", "Emancipator - 2","Emancipator - 3","Emancipator - 4","Emancipator - 5"};
+  String[] musicName = {"Emancipator - Minor Cause", "Emancipator - Valhalla","Emancipator - Merlion","Emancipator - Outlaw","Emancipator - Dusk to Dawn"};
   int numTracks = 5;
   int songIndex = 0;
 
@@ -610,6 +610,7 @@ class MusicPlayer {
     ellipse(songPoint, lineBeginY, ICON_SIZE / 8, ICON_SIZE / 8);
 
     fill(0, 0, 0);
+    textSize(20);
 	  text(musicName[songIndex], lineBeginX, music_y + ICON_SIZE / 4);
     if(paused){
     	image(playButton, playLocation, music_y, ICON_SIZE, ICON_SIZE);    	
@@ -684,6 +685,7 @@ class MusicPlayer {
           if ((mouseX > music_x) && (mouseX < endX) && (mouseY > windowy - ICON_SIZE / 4) && (mouseY < windowy)){
             songIndex = i;
             loadSong(i);
+            paused = false;
           }
           windowy -= ICON_SIZE / 4;
       } 
@@ -718,6 +720,7 @@ class SongListWindow {
   double lineEndX = lineBeginX + 2 * ICON_SIZE;
   double music_y = MIRROR_HEIGHT/8*6 + ICON_SIZE;
   double width = ICON_SIZE * 5;
+  PImage albumCover = loadImage("images/albumCover.png");
  // double height = ((ICON_SIZE / 4) * numTracks) + ICON_SIZE;
 
   SongListWindow(String[] musicName, int numTracks) {
@@ -734,7 +737,9 @@ class SongListWindow {
       windowHeight -= ICON_SIZE / 4;
     }
     int height = music_y - windowHeight;
-    rect(music_x, music_y - height - ICON_SIZE / 4, width, height + ICON_SIZE + ICON_SIZE / 4, 20);
+    rect(music_x, music_y - height - ICON_SIZE / 4, width, height + ICON_SIZE + ICON_SIZE / 7, 20);
+
+    image(albumCover, music_x + ICON_SIZE / 4, music_y - height, ICON_SIZE, ICON_SIZE);
 
 
 
@@ -742,6 +747,7 @@ class SongListWindow {
     for(int i = 0; i < numTracks; i++){
       windowy -= ICON_SIZE / 4;
       fill(0, 0, 0);
+      textSize(20);
       text(musicName[i], lineBeginX, windowy);
     }
   }
