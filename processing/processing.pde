@@ -374,6 +374,7 @@ void draw() {
   //******Main screen strats here *****////
     if(INITIALIZATION == 0){
       background(200);
+            
       mainMirror.draw();
     }
 }
@@ -905,11 +906,36 @@ println(moreAcc);
   mainMirror.musicPlayer.clicked();
 
   for (int loopCounter=0; loopCounter < ACCESSABLE_BUTTONS_ON_WINDOW.length; loopCounter++){
+    ACCESSABLE_BUTTONS_ON_WINDOW = {
+
+  // four app icons
+  {ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8*6 + ICON_SIZE}, // weather
+  {ICON_OFFSET+ICON_SIZE*2, MIRROR_HEIGHT/8*6 + ICON_SIZE}, // calendar
+  {ICON_OFFSET+ICON_SIZE*3, MIRROR_HEIGHT/8*6 + ICON_SIZE}, // health
+  {ICON_OFFSET+ICON_SIZE*4, MIRROR_HEIGHT/8*6 + ICON_SIZE}, // media
+  // three in app icons 
+  
+  {ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8*5+ICON_SIZE/2 + ICON_SIZE}, // app icon 1
+  {ICON_OFFSET+ICON_SIZE*3-ICON_SIZE/2, MIRROR_HEIGHT/8*5+ICON_SIZE/2 + ICON_SIZE}, // app icon 2
+  {ICON_OFFSET+ICON_SIZE*4, MIRROR_HEIGHT/8*5+ICON_SIZE/2 + ICON_SIZE}, // app icon 3
+  
+
+  // music player backtrack, playpause and forward
+  {1020,580}, {1135, 300}, {1135, 380},
+  // music player volumn up and down
+  {1135, 530}, {1135, 580}, 
+  // music player song list icon and actually list
+  {972, 700}, {1100, 700},
+
+
+  // more: triangle icon, lock and more list pop-up
+  {},{},{} 
+};
+
       if ((mouseX > ACCESSABLE_BUTTONS_ON_WINDOW[loopCounter][0]) 
       && (mouseX < ACCESSABLE_BUTTONS_ON_WINDOW[loopCounter][0]+BUTTONX)
       && (mouseY > ACCESSABLE_BUTTONS_ON_WINDOW[loopCounter][1]) 
       && (mouseY < ACCESSABLE_BUTTONS_ON_WINDOW[loopCounter][1]+BUTTONY)){
-        
 
         if (loopCounter == 0) {
           // app 1
@@ -982,7 +1008,6 @@ println(moreAcc);
   if (!hitSomeButton) {
     
         ON_WINDOW = -1;
-        println("rrrrrrr");
         mainMirror.apps.unclicked(mouseX, mouseY);
   }
 }
@@ -1044,7 +1069,6 @@ class Apps{
 
   void setupMainIcons() {
     PImage iconImage = loadImage("images/weather_icon.png");
-    iconImage.resize(50, 50);
     weather = new ImageButton(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8*6 + ICON_SIZE, iconImage, "weather");
 
     iconImage = loadImage("images/calendar_icon.png");
@@ -1164,7 +1188,6 @@ class Apps{
     if (ICON_OFFSET+ICON_SIZE*1 < mouseX && mouseX < ICON_OFFSET+ICON_SIZE*1 + ICON_SIZE*4
      && MIRROR_HEIGHT/8*3+ICON_SIZE/2 < mouseY && mouseY < MIRROR_HEIGHT/8*3+ICON_SIZE*5+ICON_SIZE/2) {    
       clickedOnWindow = true;
-    println("hhhhhh");
     } else {
       clickedOnWindow = false;
     }
@@ -1241,7 +1264,53 @@ class Apps{
     }
   }
 
+  void reposition() {
+
+    weather.reposition(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8*6 + ICON_SIZE);
+    calendar.reposition(ICON_OFFSET+ICON_SIZE*2, MIRROR_HEIGHT/8*6 + ICON_SIZE);
+    health.reposition(ICON_OFFSET+ICON_SIZE*3, MIRROR_HEIGHT/8*6 + ICON_SIZE);
+    media.reposition(ICON_OFFSET+ICON_SIZE*4, MIRROR_HEIGHT/8*6 + ICON_SIZE);
+  
+    englishWindow[0][0].reposition(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2);
+    englishWindow[0][1].reposition(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2);
+    englishWindow[0][2].reposition(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2);
+    
+    englishWindow[1][0].reposition(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2);
+    englishWindow[1][1].reposition(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2);
+    englishWindow[1][2].reposition(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2);
+    
+    englishWindow[2][0].reposition(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2);
+    englishWindow[2][1].reposition(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2);
+    englishWindow[2][2].reposition(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2);
+    
+    englishWindow[3][0].reposition(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2);
+    englishWindow[3][1].reposition(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2);
+    englishWindow[3][2].reposition(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2);
+
+    chineseWindow[0][0].reposition(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2);
+    chineseWindow[0][1].reposition(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2);
+    chineseWindow[0][2].reposition(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2);
+    
+    chineseWindow[1][0].reposition(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2);
+    chineseWindow[1][1].reposition(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2);
+    chineseWindow[1][2].reposition(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2);
+    
+    chineseWindow[2][0].reposition(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2);
+    chineseWindow[2][1].reposition(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2);
+    chineseWindow[2][2].reposition(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2);
+    
+    chineseWindow[3][0].reposition(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2);
+    chineseWindow[3][1].reposition(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2);
+    chineseWindow[3][2].reposition(ICON_OFFSET+ICON_SIZE*1, MIRROR_HEIGHT/8 * 3+ICON_SIZE/2);
+    
+
+      
+  }
+
   void draw() {
+    reposition();
+
+
     weather.display();
     calendar.display();
     health.display();
@@ -1455,7 +1524,18 @@ class MusicPlayer {
   }
 
   void draw() {
-
+  music_x = ICON_OFFSET+ICON_SIZE* 5;
+  music_y = MIRROR_HEIGHT/8*6 + ICON_SIZE;
+  width = ICON_SIZE * 5;
+  height = ICON_SIZE * .88;
+  lineBeginX = music_x + ICON_SIZE * 1.5;
+  lineBeginY = music_y + ICON_SIZE / 2;
+  lineEndX = lineBeginX + 2 * ICON_SIZE;
+  lineLength = lineEndX - lineBeginX;
+  songPoint = lineBeginX;
+  playLocation = music_x + ICON_SIZE / 4;
+  soundIconX = lineEndX;
+  menuIconX = soundIconX + ICON_SIZE / 3; 
     if(songWindow){
       songListWindow.draw();
     }
@@ -1605,6 +1685,11 @@ class SongListWindow {
   }
 
   void draw() {
+    music_x = ICON_OFFSET+ICON_SIZE* 5;
+    lineBeginX = music_x + ICON_SIZE * 1.5;
+    lineEndX = lineBeginX + 2 * ICON_SIZE;
+    music_y = MIRROR_HEIGHT/8*6 + ICON_SIZE;
+    width = ICON_SIZE * 5;
     int windowy = music_y;
     int windowHeight = music_y;
     fill(255,255,255);
@@ -2302,5 +2387,10 @@ class ImageButton {
 
   void display() {
     image(currentImage, x, y);
+  }
+
+  void reposition(int newX, int newY) {
+    x = newX; 
+    y = newY;
   }
 }
