@@ -61,6 +61,10 @@ void draw() {
   mainMirror.draw();
 }
 
+void mouseDragged() {
+	mainMirror.musicPlayer.mouseDragged();
+}
+
 void mouseReleased() {
   boolean hitSomeButton = false;
   mainMirror.musicPlayer.clicked();
@@ -166,7 +170,7 @@ class Mirror {
   }
 
   void draw() {
-  	background(); //ADDED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!@REWR$WER$#%FDSGREHGFDHFGHFGHFHGFHFGHGFHFGHGFHGFH
+  	//background(); //ADDED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!@REWR$WER$#%FDSGREHGFDHFGHFGHFHGFHFGHGFHFGHGFHGFH
     apps.draw();
     musicPlayer.draw();
     more.draw();
@@ -553,6 +557,12 @@ class MusicPlayer {
   String[] musicName = {"Emancipator - Minor Cause", "Emancipator - 2","Emancipator - 3","Emancipator - 4","Emancipator - 5"};
   int numTracks = 5;
   int songIndex = 0;
+
+  boolean muted = false;
+  double soundIconX = lineEndX;
+  PImage speakerMute = loadImage("images/speakerMute.png");
+  PImage speakerOn = loadImage("images/speakerOn.png");
+
   // PImage prevButton = loadImage("images/prevButton.png");
   // PImage forwardButton = loadImage("images/forwardButton.png");
   
@@ -563,7 +573,7 @@ class MusicPlayer {
   }
 
   void loadSong(int index){
-  	audio.setAttribute("src",musicList[index]);
+  	audio.src = "http://procopi2.people.uic.edu/songs/" + musicList[index];
   }
 
   void draw() {
@@ -571,14 +581,17 @@ class MusicPlayer {
     fill(255, 255, 255);
     rect(music_x, music_y, width, height, 20);
 
-    println(audio.currentTime + " " + audio.duration);
+    //println(audio.currentTime + " " + audio.duration);
     double percent;
     if(audio.currentTime <= 0){
     	percent = 0;
     }else{
     	percent = audio.currentTime / audio.duration;
     }
-    songPoint = (lineLength * percent) + lineBeginX;
+
+    if(!mousePressed){
+    	songPoint = (lineLength * percent) + lineBeginX;
+    }
 
     line(lineBeginX,lineBeginY, lineEndX ,lineBeginY);
     ellipse(songPoint, lineBeginY, ICON_SIZE / 8, ICON_SIZE / 8);
@@ -591,11 +604,35 @@ class MusicPlayer {
 		image(pauseButton, playLocation, music_y, ICON_SIZE, ICON_SIZE);
     }
 
+    if(muted){
+    	audio.muted = true;
+    	image(speakerMute, soundIconX, music_y + ICON_SIZE/4, ICON_SIZE/2, ICON_SIZE/2);
+    }else{
+    	audio.muted = false;
+    	image(speakerOn, soundIconX, music_y +ICON_SIZE/4, ICON_SIZE/2, ICON_SIZE/2);
+    }
+
+    if(audio.ended && songIndex < numTracks - 1){
+    	loadSong(++songIndex);
+    	audio.play();
+    } else if(audio.ended && songIndex == numTracks - 1){
+    	audio.currentTime = 0;
+    	paused = true;
+    }
+
     
     //image(prevButton, music_x + ICON_SIZE / 4 , music_y + ICON_SIZE / 3, ICON_SIZE / 4 , ICON_SIZE / 4);
     //image(forwardButton, music_x + ICON_SIZE + ICON_SIZE / 4, music_y + ICON_SIZE / 3, ICON_SIZE / 4, ICON_SIZE / 4);
   
   }
+
+  void mouseDragged(){
+    if ((mouseX > lineBeginX) && (mouseX < lineEndX) && (mouseY > lineBeginY - 10) && (mouseY < lineBeginY + 10)){
+    	int percent = (mouseX - lineBeginX) / lineLength;
+    	songPoint = (lineLength * percent) + lineBeginX;
+    }
+  }
+
   
   void clicked() {
   	//play and pause
@@ -621,6 +658,10 @@ class MusicPlayer {
     if ((mouseX > lineBeginX) && (mouseX < lineEndX) && (mouseY > lineBeginY - 5) && (mouseY < lineBeginY + 5)){
     	double currentPoint = (mouseX - lineBeginX) / lineLength;
   		audio.currentTime = audio.duration * currentPoint;
+    }
+
+    if ((mouseX > soundIconX + 10) && (mouseX < soundIconX + ICON_SIZE/2) && (mouseY > music_y  + ICON_SIZE / 4) && (mouseY < music_y  + (ICON_SIZE / 4) + (ICON_SIZE / 2))){
+  		muted ^= true;
     }
 
   	if(paused){
