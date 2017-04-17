@@ -1,6 +1,7 @@
 PFont font;
 PImage imgLang, imgPrev, imgNext,imgWifi, imgKeyboard, imgFinger, imgNumber,imgCheck, imgLock, imgAccount, imgLogout, imgSettings, imgColor, imgRepos, imgTemp, imgKeypad;
 color COLOR = color(0,0,0);
+String user = "Wallace";
 String LANGUAGE = "EN"; //0 - English; 1 - Russian
 int MIRROR_WIDTH = 2732;
 int MIRROR_HEIGHT = 1366;
@@ -12,11 +13,11 @@ int buttonY = 60;
 int moreSelOne = -1, moreSelTwo = -1, moreSelThree = -1, moreDumb = 0;
 boolean moreLevel1 = false, moreLevel2 = false, moreLevel3 = false;
 int moreButtonLength = 0;
-int GUEST = 0, screenLocked = 0, ACC_IDENT = 0, FINGER = 0, PASSCODE = 0;
+int GUEST = 0, screenLocked = 0, ACC_IDENT_FINGER = 0, ACC_IDENT_PASSCODE = 0, FINGER = 0, PASSCODE = 0;
 
 int moreTemp = 0, moreRepos = 1, moreColor = 4, moreAcc = 0;
 int moreLang = 0, initDumb = 0, INITIALIZATION = 1;
-int arrowHeight = 0, arrowWidth = 0, initFingerDone = 0, initPasscodeDone = 0;
+int arrowHeight = 0, arrowWidth = 0, initFingerDone = 0, initPasscodeDone = 0, loggedOut = 0;
 int initLang = 1, initWifi = 0, initPassw = 0, initWifiSel = 0, initAccount = 0, initSecurity = 0, initFinger = 0, initPasscode;
 String wifiNetwork, initWifiPassword="", initAccountName = "", initAccountPassword = "", initAccountDumb = "Wallace", initUserPasscode = "";
 
@@ -348,9 +349,9 @@ class Mirror {
 }
 
 class More {
-  String user = "Hi, Wallace!";
-  //int[][] buttons = { {ICON_OFFSET+500, 426}, {ICON_OFFSET+500, 466}, {ICON_OFFSET+500, 506}};
   
+  //int[][] buttons = { {ICON_OFFSET+500, 426}, {ICON_OFFSET+500, 466}, {ICON_OFFSET+500, 506}};
+  //moreAcc = 0 ? "Wallace" : moreAcc = 1 ? "Joseph" : "Sherzod";
   PImage stopResetImage;
   String[] labels = new String[3];
   String[] labels11 = new String[4];
@@ -521,11 +522,24 @@ class More {
           
           moreButtonLength = buttonsMoreAcc.length;
           
-          if(ACC_IDENT == 1){
-            imgFinger.resize(150, 150);
-            image(imgFinger, ICON_OFFSET + 200, 362);
+          if(ACC_IDENT_FINGER == 1){
+            imgFinger.resize(175, 230);
+            image(imgFinger, ICON_OFFSET + 595, 690);
           }
           
+          if(ACC_IDENT_PASSCODE == 1){
+            imgNumber.resize(175, 230);
+            image(imgNumber, ICON_OFFSET + 595, 690);
+            fill(255,255,255);
+            rect(ICON_OFFSET + 595,630,175,40);
+            
+            fill(0,0,0);
+            font = createFont("Arial",30,true);
+            textFont(font);
+            text(initUserPasscode,ICON_OFFSET + 605,665);
+          }
+          
+          if (loggedOut == 0){
           if(moreAcc == 0){
               strokeWeight(4);
               stroke(COLOR);
@@ -550,6 +564,7 @@ class More {
               line(ICON_OFFSET + 1178, 1072, ICON_OFFSET + 1188, 1062);
               strokeWeight(0);
             }
+          }
 
               strokeWeight(4);
               stroke(COLOR);
@@ -921,7 +936,7 @@ class MoreWindow {
 class Info {
   int hours,minutes;
   String time;
-  int day,month;
+  int day2,month2;
   String date;
 
   Info() {
@@ -942,16 +957,16 @@ class Info {
        time = hours + ":" + mins + " PM";
      }
      
-  /*   day = day();
-     month = month();
-     date = month + "/" + day;*/
+     day2 = day();
+     month2 = month();
+     date = "" + month2 + "/" + day2;
      
   }
 
   void draw() {
     textSize(30);
     text(time,ICON_OFFSET + 500,1300);
-    //text(date,120,90);
+    text(date,ICON_OFFSET + 700,1300);
   }
 }
 
@@ -1141,7 +1156,7 @@ void mouseReleased(){
     }
     
   }
-  else if((APP_OPEN == 1) && ((mouseX < ICON_OFFSET+1138) || (mouseX > ICON_OFFSET+1138+buttonX) || (mouseY < 1152 - moreButtonLength) || (mouseY > 1152))){
+  else if((APP_OPEN == 1) && (ACC_IDENT_FINGER==0) && (ACC_IDENT_PASSCODE == 0) && ((mouseX < ICON_OFFSET+1138) || (mouseX > ICON_OFFSET+1138+buttonX) || (mouseY < 1152 - moreButtonLength) || (mouseY > 1152))){
 
     moreLevel1 = false;
     moreLevel2 = false;
@@ -1158,6 +1173,8 @@ void mouseReleased(){
       && (mouseY > buttonsMore[loopCounter][1]) && (mouseY < buttonsMore[loopCounter][1]+buttonY)){
         moreSelOne = loopCounter;
         if ((moreSelOne == 2)){
+          
+          loggedOut = 1;
           moreLevel2 = false;
           moreLevel1 = false;
           GUEST      = 1;
@@ -1165,9 +1182,10 @@ void mouseReleased(){
           moreDumb   = 0;
           FINGER = 0;
           PASSCODE = 0;
-          ACC_IDENT  = 0;
+          ACC_IDENT_FINGER  = 0;
+          ACC_IDENT_PASSCODE = 0;
         }
-        else{
+        else if ((ACC_IDENT_FINGER==0) && (ACC_IDENT_PASSCODE == 0)){
           moreLevel2 = true;
           moreLevel1 = false;
         }
@@ -1264,7 +1282,7 @@ void mouseReleased(){
           moreLevel1 = true;
           moreDumb = 0;
           moreSelTwo = -1;
-          ACC_IDENT = 0;
+          ACC_IDENT_FINGER = 0;
         }
 
    //returning to second layer
@@ -1402,22 +1420,65 @@ void mouseReleased(){
     }
     
   }
+
+  
   
   if ((moreLevel2 == true) && (moreSelOne == 0) && (moreDumb != 1)){
-    
+//    initSecurity = 1; INITIALIZATION = 1;initLang = 0; initFingerDone = 0;
     if (moreSelTwo == 0){
       moreAcc = 0;
-      ACC_IDENT = 1;
+      user = "Wallace";
+      ACC_IDENT_PASSCODE = 1;
       FINGER = 1;
     }
     else if (moreSelTwo == 1){
       moreAcc = 1;
-      ACC_IDENT = 1;
+      user = "Joseph";
+      ACC_IDENT_PASSCODE = 1;
     }
     else if (moreSelTwo == 2){
       moreAcc = 2;
-      ACC_IDENT = 1;
+      user = "Sherzod";
+      ACC_IDENT_FINGER = 1;
     }
   }
-  println(screenLocked,mouseY);
+  
+  //setting passcode
+  if((ACC_IDENT_PASSCODE == 1) && (moreAcc != 2) && (mouseX > ICON_OFFSET + 595) && (mouseX < ICON_OFFSET + 595+175) && (mouseY > 690) && (mouseY < 920) && ((mouseX < ICON_OFFSET + 595 + 175 - 58) || (mouseY < 920 - 57))){
+    //entering passcode
+    if((mouseX > ICON_OFFSET + 595) && (mouseX < ICON_OFFSET + 595 + 175) && (mouseY > 690) && (mouseY < 920)) {
+      if(initUserPasscode.length()<=3){
+        initUserPasscode = initUserPasscode + "*";
+        initDumb += 1;
+      }
+    }
+    //deleting passcode
+    else if ((mouseX > ICON_OFFSET + 595 + 175 - 58) && (mouseX < ICON_OFFSET + 595 + 175) && (mouseY > 920 - 57) && (mouseY < 920)){
+    
+      if(initUserPasscode.length()>=1){
+        initUserPasscode=initUserPasscode.substring(0,initUserPasscode.length()-1);
+        initDumb -= 1;
+      }
+    }
+
+    if (initDumb >= 4){
+      ACC_IDENT_PASSCODE = 0;
+      screenLocked = 0;
+      loggedOut = 0;
+    }
+    ACC_IDENT_FINGER = 0;
+  }
+  
+  println(mouseY);
+  //setting fingerprint
+  if((ACC_IDENT_FINGER == 1) && (moreAcc == 2) && (mouseX > ICON_OFFSET + 595) && (mouseX < ICON_OFFSET + 595+175) && (mouseY > 690) && (mouseY < 920)){
+    ACC_IDENT_FINGER = 0;
+    ACC_IDENT_PASSCODE = 0;
+    initUserPasscode = "";
+    initDumb = 0;
+    loggedOut = 0;
+    screenLocked = 0;
+  }
+  
+println(moreAcc);  
 }
