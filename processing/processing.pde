@@ -406,33 +406,70 @@ class Apps{
     health.display();
     media.display();
 
+    
+    fill(224, 255, 255);
+    stroke(224, 255, 255);
+    rect(ICON_OFFSET+ICON_SIZE*1-3, MIRROR_HEIGHT/8*3-3+ICON_SIZE/2, // x and y
+    ICON_SIZE*4+6, ICON_SIZE*5+ICON_SIZE/2,                        // width and height
+    7);;  
+
+    
+
     if (0 <= ON_WINDOW && ON_WINDOW <= 6 && onMainIcon != -1 || clickedOnWindow && onMainIcon != -1) {
+      
+      switch (onMainIcon) {
+        case 0:
+          fill(135,206,250);
+          break;
+
+        case 1:
+          fill(211, 211, 211);
+          break;
+
+        case 2:
+          fill(178, 34, 34);
+          break;
+          
+        case 3:
+          fill(0, 0, 205);
+          break;
+      }
+
+      triangle(ICON_OFFSET+ICON_SIZE*(1+onMainIcon)+30, MIRROR_HEIGHT/8*6 + ICON_SIZE-20, 
+      ICON_OFFSET+ICON_SIZE*(1+onMainIcon)+40+ICON_SIZE/8, MIRROR_HEIGHT/8*6 + ICON_SIZE-20-ICON_SIZE/4, 
+      ICON_OFFSET+ICON_SIZE*(1+onMainIcon)+50+ICON_SIZE/4, MIRROR_HEIGHT/8*6 + ICON_SIZE-20);
+            
       switch (COLOR) {
         case BLACK:
           fill(0);
+          stroke(0);
         break;
 
         case BROWN:
           fill(139,69,19);
+          stroke(139,69,19);
         break;
 
         case RED:
           fill(255,69,0);
+          stroke(255,69,0);
         break;
 
         case BLUE:
           fill(30,144,255);
+          stroke(30,144,255);
         break;
 
         case YELLOW:
           fill(255,236,139);
+          stroke(255,236,139);
         break;
 
         default:
           fill(0);
-
-
       }
+
+      
       rect(ICON_OFFSET+ICON_SIZE*1-2, MIRROR_HEIGHT/8*3-2+ICON_SIZE/2, // x and y
       ICON_SIZE*4, ICON_SIZE*5,                        // width and height
       7);;         
@@ -443,10 +480,12 @@ class Apps{
         chineseWindow[onMainIcon][onSubIcon].display();
       }
     } else {
+
+
       onMainIcon = -1;
       fill(224, 255, 255);
       rect(ICON_OFFSET+ICON_SIZE*1-3, MIRROR_HEIGHT/8*3-3+ICON_SIZE/2, // x and y
-      ICON_SIZE*4+6, ICON_SIZE*5+6,                        // width and height
+      ICON_SIZE*4+6, ICON_SIZE*5+ICON_SIZE/2,                        // width and height
       7);;                                             // roundness
     }
 
