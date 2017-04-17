@@ -965,6 +965,7 @@ class Info {
 
   void draw() {
     textSize(30);
+    fill(COLOR);
     text(time,ICON_OFFSET + 500,1300);
     text(date,ICON_OFFSET + 700,1300);
   }
@@ -989,6 +990,7 @@ void mouseReleased(){
     }
     else if (initLang == 1){
       LANGUAGE = "EN";
+      moreLang = 0;
     }
   }
   
@@ -1184,6 +1186,7 @@ void mouseReleased(){
           PASSCODE = 0;
           ACC_IDENT_FINGER  = 0;
           ACC_IDENT_PASSCODE = 0;
+          initUserPasscode = "";
         }
         else if ((ACC_IDENT_FINGER==0) && (ACC_IDENT_PASSCODE == 0)){
           moreLevel2 = true;
@@ -1469,7 +1472,6 @@ void mouseReleased(){
     ACC_IDENT_FINGER = 0;
   }
   
-  println(mouseY);
   //setting fingerprint
   if((ACC_IDENT_FINGER == 1) && (moreAcc == 2) && (mouseX > ICON_OFFSET + 595) && (mouseX < ICON_OFFSET + 595+175) && (mouseY > 690) && (mouseY < 920)){
     ACC_IDENT_FINGER = 0;
