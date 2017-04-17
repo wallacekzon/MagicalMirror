@@ -1349,35 +1349,8 @@ class Apps{
       ICON_OFFSET+ICON_SIZE*(1+onMainIcon)+40+ICON_SIZE/8, MIRROR_HEIGHT/8*6 + ICON_SIZE-20-ICON_SIZE/4, 
       ICON_OFFSET+ICON_SIZE*(1+onMainIcon)+50+ICON_SIZE/4, MIRROR_HEIGHT/8*6 + ICON_SIZE-20);
             
-      switch (COLOR) {
-        case BLACK:
-          fill(0);
-          stroke(0);
-        break;
-
-        case BROWN:
-          fill(139,69,19);
-          stroke(139,69,19);
-        break;
-
-        case RED:
-          fill(255,69,0);
-          stroke(255,69,0);
-        break;
-
-        case BLUE:
-          fill(30,144,255);
-          stroke(30,144,255);
-        break;
-
-        case YELLOW:
-          fill(255,236,139);
-          stroke(255,236,139);
-        break;
-
-        default:
-          fill(0);
-      }
+      stroke(COLOR);
+      fill(COLOR);
 
       
       rect(ICON_OFFSET+ICON_SIZE*1-2, MIRROR_HEIGHT/8*3-2+ICON_SIZE/2, // x and y
@@ -1539,12 +1512,13 @@ class MusicPlayer {
     if(songWindow){
       songListWindow.draw();
     }
-
+    stroke(COLOR);
     fill(255, 255, 255);
     if(!songWindow){
       rect(music_x, music_y, width, height, 20);
     }
 
+    stroke(0);
     image(menuButton, menuIconX, music_y, ICON_SIZE, ICON_SIZE);
 
     //println(audio.currentTime + " " + audio.duration);
@@ -1698,8 +1672,10 @@ class SongListWindow {
       windowHeight -= ICON_SIZE / 4;
     }
     int height = music_y - windowHeight;
+    stroke(COLOR);
     rect(music_x, music_y - height - ICON_SIZE / 4, width, height + ICON_SIZE + ICON_SIZE / 7, 20);
 
+    stroke(0);
     image(albumCover, music_x + ICON_SIZE / 4, music_y - height, ICON_SIZE, ICON_SIZE);
 
 
