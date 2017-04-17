@@ -170,7 +170,7 @@ class Mirror {
   }
 
   void draw() {
-  	//background(); //ADDED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!@REWR$WER$#%FDSGREHGFDHFGHFGHFHGFHFGHGFHFGHGFHGFH
+  	background(); //ADDED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!@REWR$WER$#%FDSGREHGFDHFGHFGHFHGFHFGHGFHFGHGFHGFH
     apps.draw();
     musicPlayer.draw();
     more.draw();
@@ -563,12 +563,17 @@ class MusicPlayer {
   PImage speakerMute = loadImage("images/speakerMute.png");
   PImage speakerOn = loadImage("images/speakerOn.png");
 
+  boolean songWindow = false;
+  PImage menuButton = loadImage("images/menuButton.png");
+
+  int menuIconX = soundIconX + ICON_SIZE / 3;
+
   // PImage prevButton = loadImage("images/prevButton.png");
   // PImage forwardButton = loadImage("images/forwardButton.png");
   
 
   MusicPlayer() {
-    songListWindow = new SongListWindow();
+    songListWindow = new SongListWindow(musicName, numTracks);
     loadSong(songIndex);
   }
 
@@ -577,9 +582,17 @@ class MusicPlayer {
   }
 
   void draw() {
-    songListWindow.draw();
+
+    if(songWindow){
+      songListWindow.draw();
+    }
+
     fill(255, 255, 255);
-    rect(music_x, music_y, width, height, 20);
+    if(!songWindow){
+      rect(music_x, music_y, width, height, 20);
+    }
+
+    image(menuButton, menuIconX, music_y, ICON_SIZE, ICON_SIZE);
 
     //println(audio.currentTime + " " + audio.duration);
     double percent;
@@ -597,7 +610,7 @@ class MusicPlayer {
     ellipse(songPoint, lineBeginY, ICON_SIZE / 8, ICON_SIZE / 8);
 
     fill(0, 0, 0);
-	text(musicName[songIndex], lineBeginX, music_y + ICON_SIZE / 4);
+	  text(musicName[songIndex], lineBeginX, music_y + ICON_SIZE / 4);
     if(paused){
     	image(playButton, playLocation, music_y, ICON_SIZE, ICON_SIZE);    	
     }else{
@@ -664,6 +677,28 @@ class MusicPlayer {
   		muted ^= true;
     }
 
+    if(songWindow){
+      int windowy = music_y - ICON_SIZE / 4;
+      int endX = width + music_x;
+      for(int i = 0; i < numTracks; i++){
+          if ((mouseX > music_x) && (mouseX < endX) && (mouseY > windowy - ICON_SIZE / 4) && (mouseY < windowy)){
+            songIndex = i;
+            loadSong(i);
+          }
+          windowy -= ICON_SIZE / 4;
+      } 
+    }
+
+    if ((mouseX > menuIconX + 10) && (mouseX < menuIconX + ICON_SIZE) && (mouseY > music_y  + ICON_SIZE / 4) && (mouseY < music_y  + (ICON_SIZE / 4) + (ICON_SIZE / 2))){
+      songWindow ^= true;
+    }else{
+      songWindow = false;
+    }
+
+
+
+
+
   	if(paused){
   		audio.pause();
   	} else{
@@ -676,13 +711,39 @@ class MusicPlayer {
 }
 
 class SongListWindow {
-  
-  SongListWindow() {
+  String[] musicName;
+  int numTracks;
+  double music_x = ICON_OFFSET+ICON_SIZE* 5;
+  double lineBeginX = music_x + ICON_SIZE * 1.5;
+  double lineEndX = lineBeginX + 2 * ICON_SIZE;
+  double music_y = MIRROR_HEIGHT/8*6 + ICON_SIZE;
+  double width = ICON_SIZE * 5;
+ // double height = ((ICON_SIZE / 4) * numTracks) + ICON_SIZE;
 
+  SongListWindow(String[] musicName, int numTracks) {
+      this.musicName = musicName;
+      this.numTracks = numTracks;
   }
 
   void draw() {
+    int windowy = music_y;
+    int windowHeight = music_y;
+    fill(255,255,255);
+    println(height);
+    for(int i = 0; i < numTracks; i++){
+      windowHeight -= ICON_SIZE / 4;
+    }
+    int height = music_y - windowHeight;
+    rect(music_x, music_y - height - ICON_SIZE / 4, width, height + ICON_SIZE + ICON_SIZE / 4, 20);
 
+
+
+    line(music_x + (width * .08) ,music_y, music_x + (width * .92) ,music_y);
+    for(int i = 0; i < numTracks; i++){
+      windowy -= ICON_SIZE / 4;
+      fill(0, 0, 0);
+      text(musicName[i], lineBeginX, windowy);
+    }
   }
 }
 
