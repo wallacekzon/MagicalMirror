@@ -1337,7 +1337,7 @@ class Apps{
           break;
 
         case 1:
-          fill(200);
+          fill(100);
           break;
 
         case 2:
