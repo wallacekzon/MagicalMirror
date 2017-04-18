@@ -1033,7 +1033,9 @@ class Mirror {
     more.draw();
     info.draw();
     apps.draw();
-    musicPlayer.draw();
+    if (loggedOut == 0) {
+      musicPlayer.draw();
+    }
   }
 }
 
@@ -1312,13 +1314,15 @@ class Apps{
 
 
     weather.display();
-    calendar.display();
-    health.display();
-    media.display();
-
     
-    fill(224, 255, 255);
-    stroke(224, 255, 255);
+    if (screenLocked == 0 && loggedOut == 0) {
+      calendar.display();
+      health.display();
+      media.display();
+    }
+    
+    fill(200);
+    stroke(200);
     rect(ICON_OFFSET+ICON_SIZE*1-3, MIRROR_HEIGHT/8*3-3+ICON_SIZE/2, // x and y
     ICON_SIZE*4+6, ICON_SIZE*5+ICON_SIZE/2,                        // width and height
     7);;  
@@ -1333,7 +1337,7 @@ class Apps{
           break;
 
         case 1:
-          fill(211, 211, 211);
+          fill(200);
           break;
 
         case 2:
@@ -1366,7 +1370,7 @@ class Apps{
 
 
       onMainIcon = -1;
-      fill(224, 255, 255);
+      fill(200);
       rect(ICON_OFFSET+ICON_SIZE*1-3, MIRROR_HEIGHT/8*3-3+ICON_SIZE/2, // x and y
       ICON_SIZE*4+6, ICON_SIZE*5+ICON_SIZE/2,                        // width and height
       7);;                                             // roundness
