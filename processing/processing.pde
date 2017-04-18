@@ -44,13 +44,13 @@ int arrowHeight = 0, arrowWidth = 0, initFingerDone = 0, initPasscodeDone = 0, l
 int initLang = 1, initWifi = 0, initPassw = 0, initWifiSel = 0, initAccount = 0, initSecurity = 0, initFinger = 0, initPasscode;
 String wifiNetwork, initWifiPassword="", initAccountName = "", initAccountPassword = "", initAccountDumb = "Wallace", initUserPasscode = "";
 
-int buttonsMore[][] = {{1138, 1092-buttonY*2}, {1138, 1092 - buttonY}, {1138, 1092}};
-int buttonsMoreSet[][] = {{1138, 1092-buttonY*4}, {1138, 1092-buttonY*3}, {1138, 1092-buttonY*2}, {1138, 1092-buttonY}, {1138, 1092}};
-int buttonsMoreAcc[][] = {{1138, 1092-buttonY*3}, {1138, 1092-buttonY*2}, {1138, 1092-buttonY}, {1138, 1092}};
-int buttonsMoreSet1[][] = {{1138, 1092-buttonY*2}, {1138, 1092-buttonY}, {1138, 1092}};//Temperature
-int buttonsMoreSet2[][] = {{1138, 1092-buttonY*10}, {1138, 1092-buttonY*9}, {1138, 1092-buttonY*8}, {1138, 1092-buttonY*7}, {1138, 1092-buttonY*6}, {1138, 1092-buttonY*5}, {1138, 1092-buttonY*4}, {1138, 1092-buttonY*3}, {1138, 1092-buttonY*2}, {1138, 1092-buttonY}, {1138, 1092}};//Language
-int buttonsMoreSet3[][] = {{1138, 1092-buttonY*3}, {1138, 1092-buttonY*2}, {1138, 1092-buttonY}, {1138, 1092}};//Reposition
-int buttonsMoreSet4[][] = {{1138, 1092-buttonY*5}, {1138, 1092-buttonY*4}, {1138, 1092-buttonY*3}, {1138, 1092-buttonY*2}, {1138, 1092-buttonY}, {1138, 1092}};//Color Scheme
+int buttonsMore[][] = {{1138, 1192-buttonY*2}, {1138, 1192 - buttonY}, {1138, 1192}};
+int buttonsMoreSet[][] = {{1138, 1192-buttonY*4}, {1138, 1192-buttonY*3}, {1138, 1192-buttonY*2}, {1138, 1192-buttonY}, {1138, 1192}};
+int buttonsMoreAcc[][] = {{1138, 1192-buttonY*3}, {1138, 1192-buttonY*2}, {1138, 1192-buttonY}, {1138, 1192}};
+int buttonsMoreSet1[][] = {{1138, 1192-buttonY*2}, {1138, 1192-buttonY}, {1138, 1192}};//Temperature
+int buttonsMoreSet2[][] = {{1138, 1192-buttonY*10}, {1138, 1192-buttonY*9}, {1138, 1192-buttonY*8}, {1138, 1192-buttonY*7}, {1138, 1192-buttonY*6}, {1138, 1192-buttonY*5}, {1138, 1192-buttonY*4}, {1138, 1192-buttonY*3}, {1138, 1192-buttonY*2}, {1138, 1192-buttonY}, {1138, 1192}};//Language
+int buttonsMoreSet3[][] = {{1138, 1192-buttonY*3}, {1138, 1192-buttonY*2}, {1138, 1192-buttonY}, {1138, 1192}};//Reposition
+int buttonsMoreSet4[][] = {{1138, 1192-buttonY*5}, {1138, 1192-buttonY*4}, {1138, 1192-buttonY*3}, {1138, 1192-buttonY*2}, {1138, 1192-buttonY}, {1138, 1192}};//Color Scheme
 
 //*********************************** end of more *************************************/
 
@@ -558,7 +558,7 @@ void mouseReleased() {
   //determine whether More window is open****************************************************************
    moreButtonLength = moreButtonLength * buttonY;
   
-  if ((mouseX > ICON_OFFSET+1138) && (mouseX < ICON_OFFSET+1138+207) && (mouseY > 1162) && (mouseY < 1162+50)){
+  if ((mouseX > ICON_OFFSET+1138) && (mouseX < ICON_OFFSET+1138+207) && (mouseY > 1262) && (mouseY < 1262+50)){
     APP_OPEN = APP_OPEN + 1;
     APP_OPEN = APP_OPEN % 2;
     moreDumb = 0;
@@ -573,7 +573,7 @@ void mouseReleased() {
     }
     
   }
-  else if((APP_OPEN == 1) && (ACC_IDENT_FINGER==0) && (ACC_IDENT_PASSCODE == 0) && ((mouseX < ICON_OFFSET+1138) || (mouseX > ICON_OFFSET+1138+buttonX) || (mouseY < 1152 - moreButtonLength) || (mouseY > 1152))){
+  else if((APP_OPEN == 1) && (ACC_IDENT_FINGER==0) && (ACC_IDENT_PASSCODE == 0) && ((mouseX < ICON_OFFSET+1138) || (mouseX > ICON_OFFSET+1138+buttonX) || (mouseY < 1252 - moreButtonLength) || (mouseY > 1252))){
 
     moreLevel1 = false;
     moreLevel2 = false;
@@ -695,7 +695,7 @@ void mouseReleased() {
   //returning to first layer
   if ((moreLevel2 == true) && (mouseX > 1138 + ICON_OFFSET) &&
         (mouseX < 1138+ICON_OFFSET + buttonX) && 
-        (mouseY > 1092) && (mouseY < 1092 + buttonY)){
+        (mouseY > 1192) && (mouseY < 1192 + buttonY)){
           moreLevel2 = false;
           moreLevel1 = true;
           moreDumb = 0;
@@ -706,7 +706,7 @@ void mouseReleased() {
    //returning to second layer
   if ((moreLevel3 == true) && (mouseX > 1138 + ICON_OFFSET) &&
         (mouseX < 1138+ICON_OFFSET + buttonX) && 
-        (mouseY > 1092) && (mouseY < 1092 + buttonY)){
+        (mouseY > 1192) && (mouseY < 1192 + buttonY)){
           moreLevel3 = false;
           moreLevel2 = true;
           moreSelThree = -1;
@@ -757,7 +757,7 @@ void mouseReleased() {
   }
   
   //check whether lockscreen is selected  
-  if ((mouseX > ICON_OFFSET+1345) && (mouseX < ICON_OFFSET+1345+20) && (mouseY > 1162) && (mouseY < 1162+50)){
+  if ((mouseX > ICON_OFFSET+1345) && (mouseX < ICON_OFFSET+1345+20) && (mouseY > 1262) && (mouseY < 1262+50)){
      screenLocked = 1; 
   }
   
@@ -862,16 +862,16 @@ void mouseReleased() {
   }
   
   //setting passcode
-  if((ACC_IDENT_PASSCODE == 1) && (moreAcc != 2) && (mouseX > ICON_OFFSET + 595) && (mouseX < ICON_OFFSET + 595+175) && (mouseY > 690) && (mouseY < 920) && ((mouseX < ICON_OFFSET + 595 + 175 - 58) || (mouseY < 920 - 57))){
+  if((ACC_IDENT_PASSCODE == 1) && (moreAcc != 2) && (mouseX > ICON_OFFSET + 595) && (mouseX < ICON_OFFSET + 595+175) && (mouseY > 790) && (mouseY < 1020) && ((mouseX < ICON_OFFSET + 595 + 175 - 58) || (mouseY < 1020 - 57))){
     //entering passcode
-    if((mouseX > ICON_OFFSET + 595) && (mouseX < ICON_OFFSET + 595 + 175) && (mouseY > 690) && (mouseY < 920)) {
+    if((mouseX > ICON_OFFSET + 595) && (mouseX < ICON_OFFSET + 595 + 175) && (mouseY > 790) && (mouseY < 1020)) {
       if(initUserPasscode.length()<=3){
         initUserPasscode = initUserPasscode + "*";
         initDumb += 1;
       }
     }
     //deleting passcode
-    else if ((mouseX > ICON_OFFSET + 595 + 175 - 58) && (mouseX < ICON_OFFSET + 595 + 175) && (mouseY > 920 - 57) && (mouseY < 920)){
+    else if ((mouseX > ICON_OFFSET + 595 + 175 - 58) && (mouseX < ICON_OFFSET + 595 + 175) && (mouseY > 1020 - 57) && (mouseY < 1020)){
     
       if(initUserPasscode.length()>=1){
         initUserPasscode=initUserPasscode.substring(0,initUserPasscode.length()-1);
@@ -888,7 +888,7 @@ void mouseReleased() {
   }
   
   //setting fingerprint
-  if((ACC_IDENT_FINGER == 1) && (moreAcc == 2) && (mouseX > ICON_OFFSET + 595) && (mouseX < ICON_OFFSET + 595+175) && (mouseY > 690) && (mouseY < 920)){
+  if((ACC_IDENT_FINGER == 1) && (moreAcc == 2) && (mouseX > ICON_OFFSET + 595) && (mouseX < ICON_OFFSET + 595+175) && (mouseY > 790) && (mouseY < 1020)){
     ACC_IDENT_FINGER = 0;
     ACC_IDENT_PASSCODE = 0;
     initUserPasscode = "";
@@ -897,7 +897,7 @@ void mouseReleased() {
     screenLocked = 0;
   }
   
-println(moreAcc);  
+println(mouseY);
 
 //***************************************end of more *********************/
 
@@ -1459,7 +1459,7 @@ class MusicPlayer {
   SongListWindow songListWindow;
   double music_x = ICON_OFFSET+ICON_SIZE* 5;
   double music_y = MIRROR_HEIGHT/8*6 + ICON_SIZE;
-  double width = ICON_SIZE * 5;
+  double width = ICON_SIZE * 5 - ICON_SIZE/4;
   double height = ICON_SIZE * .88;
   PImage playButton = loadImage("images/playerMainButtons.png");
   PImage pauseButton = loadImage("images/pauseButton.png");
@@ -1503,7 +1503,7 @@ class MusicPlayer {
   void draw() {
   music_x = ICON_OFFSET+ICON_SIZE* 5;
   music_y = MIRROR_HEIGHT/8*6 + ICON_SIZE;
-  width = ICON_SIZE * 5;
+  width = ICON_SIZE * 5 - ICON_SIZE/4;
   height = ICON_SIZE * .88;
   lineBeginX = music_x + ICON_SIZE * 1.5;
   lineBeginY = music_y + ICON_SIZE / 2;
@@ -1653,7 +1653,7 @@ class SongListWindow {
   double lineBeginX = music_x + ICON_SIZE * 1.5;
   double lineEndX = lineBeginX + 2 * ICON_SIZE;
   double music_y = MIRROR_HEIGHT/8*6 + ICON_SIZE;
-  double width = ICON_SIZE * 5;
+  double width = ICON_SIZE * 5 - ICON_SIZE/4;
   PImage albumCover = loadImage("images/albumCover.png");
  // double height = ((ICON_SIZE / 4) * numTracks) + ICON_SIZE;
 
@@ -1667,7 +1667,7 @@ class SongListWindow {
     lineBeginX = music_x + ICON_SIZE * 1.5;
     lineEndX = lineBeginX + 2 * ICON_SIZE;
     music_y = MIRROR_HEIGHT/8*6 + ICON_SIZE;
-    width = ICON_SIZE * 5;
+    width = ICON_SIZE * 5 - ICON_SIZE/4;
     int windowy = music_y;
     int windowHeight = music_y;
     fill(255,255,255);
@@ -1778,29 +1778,29 @@ class More {
     
     font = createFont("Arial",30,true);
     textFont(font);
-    text(user,ICON_OFFSET+1138+40,1212);
-    triangle(ICON_OFFSET+1138, 1206, ICON_OFFSET+1138+15, 1206-15, ICON_OFFSET+1138+30, 1206);
+    text(user,ICON_OFFSET+1138+40,1312);
+    triangle(ICON_OFFSET+1138, 1306, ICON_OFFSET+1138+15, 1306-15, ICON_OFFSET+1138+30, 1306);
     
     font = createFont("Arial",20,true);
     textFont(font);
     
-    text(labels[0],ICON_OFFSET+1138+60,972+buttonY*0.67);
-    text(labels[1],ICON_OFFSET+1138+60,1032+buttonY*0.67);
-    text(labels[2],ICON_OFFSET+1138+60,1092+buttonY*0.67);
+    text(labels[0],ICON_OFFSET+1138+60,1072+buttonY*0.67);
+    text(labels[1],ICON_OFFSET+1138+60,1132+buttonY*0.67);
+    text(labels[2],ICON_OFFSET+1138+60,1192+buttonY*0.67);
     
     moreButtonLength = buttonsMore.length;
     
     imgAccount.resize(50, 50);
-    image(imgAccount, ICON_OFFSET + 1143,972+5);
+    image(imgAccount, ICON_OFFSET + 1143,1072+5);
     
     imgSettings.resize(50, 50);
-    image(imgSettings, ICON_OFFSET + 1143, 1032+5);
+    image(imgSettings, ICON_OFFSET + 1143, 1132+5);
     
     imgLogout.resize(50, 50);
-    image(imgLogout, ICON_OFFSET + 1143, 1092+5);
+    image(imgLogout, ICON_OFFSET + 1143, 1192+5);
     
     imgLock.resize(30, 30);
-    image(imgLock, ICON_OFFSET + 1345, 1185);
+    image(imgLock, ICON_OFFSET + 1345, 1285);
     
     }
     //Setting screen
@@ -1814,40 +1814,40 @@ class More {
           font = createFont("Arial",20,true);
           textFont(font);
 
-          text(labels12[0],ICON_OFFSET+1138+60,852+buttonY*0.67);
-          text(labels12[1],ICON_OFFSET+1138+60,912+buttonY*0.67);
-          text(labels12[2],ICON_OFFSET+1138+60,972+buttonY*0.67);
-          text(labels12[3],ICON_OFFSET+1138+60,1032+buttonY*0.67);
-          text(labels12[4],ICON_OFFSET+1138+60,1092+buttonY*0.67);
+          text(labels12[0],ICON_OFFSET+1138+60,952+buttonY*0.67);
+          text(labels12[1],ICON_OFFSET+1138+60,1012+buttonY*0.67);
+          text(labels12[2],ICON_OFFSET+1138+60,1072+buttonY*0.67);
+          text(labels12[3],ICON_OFFSET+1138+60,1132+buttonY*0.67);
+          text(labels12[4],ICON_OFFSET+1138+60,1192+buttonY*0.67);
           
           fill(COLOR);
           font = createFont("Arial",30,true);
           textFont(font);
-          text(user,ICON_OFFSET+1138+40,1212);
-          triangle(ICON_OFFSET+1138, 1206, ICON_OFFSET+1138+15, 1206-15, ICON_OFFSET+1138+30, 1206);
+          text(user,ICON_OFFSET+1138+40,1312);
+          triangle(ICON_OFFSET+1138, 1306, ICON_OFFSET+1138+15, 1306-15, ICON_OFFSET+1138+30, 1306);
           
           moreButtonLength = buttonsMoreSet.length;
           
           imgTemp.resize(50, 50);
-          image(imgTemp, ICON_OFFSET + 1143, 852+5);
+          image(imgTemp, ICON_OFFSET + 1143, 952+5);
           
           imgLang.resize(50, 50);
-          image(imgLang, ICON_OFFSET + 1143, 912+5);
+          image(imgLang, ICON_OFFSET + 1143, 1012+5);
           
           imgRepos.resize(50, 50);
-          image(imgRepos, ICON_OFFSET + 1143, 972+5);
+          image(imgRepos, ICON_OFFSET + 1143, 1072+5);
           
           imgColor.resize(50, 50);
-          image(imgColor, ICON_OFFSET + 1143, 1032+5);
+          image(imgColor, ICON_OFFSET + 1143, 1132+5);
           
           imgLock.resize(30, 30);
-          image(imgLock, ICON_OFFSET + 1345, 1185);
+          image(imgLock, ICON_OFFSET + 1345, 1285);
           
           strokeWeight(4);
           stroke(COLOR);
-          line(ICON_OFFSET + 1148, 1122, ICON_OFFSET + 1188, 1122);
-          line(ICON_OFFSET + 1148, 1122, ICON_OFFSET + 1158, 1112);
-          line(ICON_OFFSET + 1148, 1122, ICON_OFFSET + 1158, 1132);
+          line(ICON_OFFSET + 1148, 1222, ICON_OFFSET + 1188, 1222);
+          line(ICON_OFFSET + 1148, 1222, ICON_OFFSET + 1158, 1212);
+          line(ICON_OFFSET + 1148, 1222, ICON_OFFSET + 1158, 1232);
           strokeWeight(0);
     
       }
@@ -1861,71 +1861,71 @@ class More {
           font = createFont("Arial",20,true);
           textFont(font);
     
-          text(labels11[0],ICON_OFFSET+1138+60,912+buttonY*0.67);
-          text(labels11[1],ICON_OFFSET+1138+60,972+buttonY*0.67);
-          text(labels11[2],ICON_OFFSET+1138+60,1032+buttonY*0.67);
-          text(labels11[3],ICON_OFFSET+1138+60,1092+buttonY*0.67);
+          text(labels11[0],ICON_OFFSET+1138+60,1012+buttonY*0.67);
+          text(labels11[1],ICON_OFFSET+1138+60,1072+buttonY*0.67);
+          text(labels11[2],ICON_OFFSET+1138+60,1132+buttonY*0.67);
+          text(labels11[3],ICON_OFFSET+1138+60,1192+buttonY*0.67);
           
           fill(COLOR);
           font = createFont("Arial",30,true);
           textFont(font);
-          text(user,ICON_OFFSET+1138+40,1212);
-          triangle(ICON_OFFSET+1138, 1206, ICON_OFFSET+1138+15, 1206-15, ICON_OFFSET+1138+30, 1206);
+          text(user,ICON_OFFSET+1138+40,1312);
+          triangle(ICON_OFFSET+1138, 1306, ICON_OFFSET+1138+15, 1306-15, ICON_OFFSET+1138+30, 1306);
           
           imgLock.resize(30, 30);
-          image(imgLock, ICON_OFFSET + 1345, 1185);
+          image(imgLock, ICON_OFFSET + 1345, 1285);
           
           moreButtonLength = buttonsMoreAcc.length;
           
           if(ACC_IDENT_FINGER == 1){
             imgFinger.resize(175, 230);
-            image(imgFinger, ICON_OFFSET + 595, 690);
+            image(imgFinger, ICON_OFFSET + 595, 790);
           }
           
           if(ACC_IDENT_PASSCODE == 1){
             imgNumber.resize(175, 230);
-            image(imgNumber, ICON_OFFSET + 595, 690);
+            image(imgNumber, ICON_OFFSET + 595, 790);
             fill(255,255,255);
-            rect(ICON_OFFSET + 595,630,175,40);
+            rect(ICON_OFFSET + 595,730,175,40);
             
             fill(0,0,0);
             font = createFont("Arial",30,true);
             textFont(font);
-            text(initUserPasscode,ICON_OFFSET + 605,665);
+            text(initUserPasscode,ICON_OFFSET + 605,765);
           }
           
           if (loggedOut == 0){
           if(moreAcc == 0){
               strokeWeight(4);
               stroke(COLOR);
-              line(ICON_OFFSET + 1148, 942, ICON_OFFSET + 1188, 942);
-              line(ICON_OFFSET + 1178, 932, ICON_OFFSET + 1188, 942);
-              line(ICON_OFFSET + 1178, 952, ICON_OFFSET + 1188, 942);
+              line(ICON_OFFSET + 1148, 1042, ICON_OFFSET + 1188, 1042);
+              line(ICON_OFFSET + 1178, 1032, ICON_OFFSET + 1188, 1042);
+              line(ICON_OFFSET + 1178, 1052, ICON_OFFSET + 1188, 1042);
               strokeWeight(0);
             }
             else if(moreAcc == 1){
               strokeWeight(4);
               stroke(COLOR);
-              line(ICON_OFFSET + 1148, 1002, ICON_OFFSET + 1188, 1002);
-              line(ICON_OFFSET + 1178, 992, ICON_OFFSET + 1188, 1002);
-              line(ICON_OFFSET + 1178, 1012, ICON_OFFSET + 1188, 1002);
+              line(ICON_OFFSET + 1148, 1102, ICON_OFFSET + 1188, 1102);
+              line(ICON_OFFSET + 1178, 1092, ICON_OFFSET + 1188, 1102);
+              line(ICON_OFFSET + 1178, 1112, ICON_OFFSET + 1188, 1102);
               strokeWeight(0);
             }
             else if(moreAcc == 2){
               strokeWeight(4);
               stroke(COLOR);
-              line(ICON_OFFSET + 1148, 1062, ICON_OFFSET + 1188, 1062);
-              line(ICON_OFFSET + 1178, 1052, ICON_OFFSET + 1188, 1062);
-              line(ICON_OFFSET + 1178, 1072, ICON_OFFSET + 1188, 1062);
+              line(ICON_OFFSET + 1148, 1162, ICON_OFFSET + 1188, 1162);
+              line(ICON_OFFSET + 1178, 1152, ICON_OFFSET + 1188, 1162);
+              line(ICON_OFFSET + 1178, 1172, ICON_OFFSET + 1188, 1162);
               strokeWeight(0);
             }
           }
 
               strokeWeight(4);
               stroke(COLOR);
-              line(ICON_OFFSET + 1148, 1122, ICON_OFFSET + 1188, 1122);
-              line(ICON_OFFSET + 1148, 1122, ICON_OFFSET + 1158, 1112);
-              line(ICON_OFFSET + 1148, 1122, ICON_OFFSET + 1158, 1132);
+              line(ICON_OFFSET + 1148, 1222, ICON_OFFSET + 1188, 1222);
+              line(ICON_OFFSET + 1148, 1222, ICON_OFFSET + 1158, 1212);
+              line(ICON_OFFSET + 1148, 1222, ICON_OFFSET + 1158, 1232);
               strokeWeight(0);
           
       }
@@ -1942,42 +1942,42 @@ class More {
             font = createFont("Arial",20,true);
             textFont(font);
 
-            text(labels121[0],ICON_OFFSET+1138+60,972+buttonY*0.67);
-            text(labels121[1],ICON_OFFSET+1138+60,1032+buttonY*0.67);
-            text(labels121[2],ICON_OFFSET+1138+60,1092+buttonY*0.67);
+            text(labels121[0],ICON_OFFSET+1138+60,1072+buttonY*0.67);
+            text(labels121[1],ICON_OFFSET+1138+60,1132+buttonY*0.67);
+            text(labels121[2],ICON_OFFSET+1138+60,1192+buttonY*0.67);
             
             font = createFont("Arial",30,true);
             textFont(font);
-            text(user,ICON_OFFSET+1138+40,1212);
-            triangle(ICON_OFFSET+1138, 1206, ICON_OFFSET+1138+15, 1206-15, ICON_OFFSET+1138+30, 1206);
-            
+            text(user,ICON_OFFSET+1138+40,1312);
+            triangle(ICON_OFFSET+1138, 1306, ICON_OFFSET+1138+15, 1306-15, ICON_OFFSET+1138+30, 1306);
+          
             imgLock.resize(30, 30);
-            image(imgLock, ICON_OFFSET + 1345, 1185);
+            image(imgLock, ICON_OFFSET + 1345, 1285);
             
             moreButtonLength = buttonsMoreSet1.length;
             
             if(moreTemp == 0){
               strokeWeight(4);
               stroke(COLOR);
-              line(ICON_OFFSET + 1148, 1002, ICON_OFFSET + 1188, 1002);
-              line(ICON_OFFSET + 1178, 992, ICON_OFFSET + 1188, 1002);
-              line(ICON_OFFSET + 1178, 1012, ICON_OFFSET + 1188, 1002);
+              line(ICON_OFFSET + 1148, 1102, ICON_OFFSET + 1188, 1102);
+              line(ICON_OFFSET + 1178, 1092, ICON_OFFSET + 1188, 1102);
+              line(ICON_OFFSET + 1178, 1112, ICON_OFFSET + 1188, 1102);
               strokeWeight(0);
             }
             else if(moreTemp == 1){
               strokeWeight(4);
               stroke(COLOR);
-              line(ICON_OFFSET + 1148, 1062, ICON_OFFSET + 1188, 1062);
-              line(ICON_OFFSET + 1178, 1052, ICON_OFFSET + 1188, 1062);
-              line(ICON_OFFSET + 1178, 1072, ICON_OFFSET + 1188, 1062);
+              line(ICON_OFFSET + 1148, 1162, ICON_OFFSET + 1188, 1162);
+              line(ICON_OFFSET + 1178, 1152, ICON_OFFSET + 1188, 1162);
+              line(ICON_OFFSET + 1178, 1172, ICON_OFFSET + 1188, 1162);
               strokeWeight(0);
             }
 
               strokeWeight(4);
               stroke(COLOR);
-              line(ICON_OFFSET + 1148, 1122, ICON_OFFSET + 1188, 1122);
-              line(ICON_OFFSET + 1148, 1122, ICON_OFFSET + 1158, 1112);
-              line(ICON_OFFSET + 1148, 1122, ICON_OFFSET + 1158, 1132);
+              line(ICON_OFFSET + 1148, 1222, ICON_OFFSET + 1188, 1222);
+              line(ICON_OFFSET + 1148, 1222, ICON_OFFSET + 1158, 1212);
+              line(ICON_OFFSET + 1148, 1222, ICON_OFFSET + 1158, 1232);
               strokeWeight(0);
           }
      //language
@@ -1993,115 +1993,115 @@ class More {
             font = createFont("Arial",20,true);
             textFont(font);
 
-            text(labels122[0],ICON_OFFSET+1138+60,492+buttonY*0.67);
-            text(labels122[1],ICON_OFFSET+1138+60,552+buttonY*0.67);
-            text(labels122[2],ICON_OFFSET+1138+60,612+buttonY*0.67);
-            text(labels122[3],ICON_OFFSET+1138+60,672+buttonY*0.67);
-            text(labels122[4],ICON_OFFSET+1138+60,732+buttonY*0.67);
-            text(labels122[5],ICON_OFFSET+1138+60,792+buttonY*0.67);
-            text(labels122[6],ICON_OFFSET+1138+60,852+buttonY*0.67);
-            text(labels122[7],ICON_OFFSET+1138+60,912+buttonY*0.67);
-            text(labels122[8],ICON_OFFSET+1138+60,972+buttonY*0.67);
-            text(labels122[9],ICON_OFFSET+1138+60,1032+buttonY*0.67);
-            text(labels122[10],ICON_OFFSET+1138+60,1092+buttonY*0.67);
+            text(labels122[0],ICON_OFFSET+1138+60,592+buttonY*0.67);
+            text(labels122[1],ICON_OFFSET+1138+60,652+buttonY*0.67);
+            text(labels122[2],ICON_OFFSET+1138+60,712+buttonY*0.67);
+            text(labels122[3],ICON_OFFSET+1138+60,772+buttonY*0.67);
+            text(labels122[4],ICON_OFFSET+1138+60,832+buttonY*0.67);
+            text(labels122[5],ICON_OFFSET+1138+60,892+buttonY*0.67);
+            text(labels122[6],ICON_OFFSET+1138+60,952+buttonY*0.67);
+            text(labels122[7],ICON_OFFSET+1138+60,1012+buttonY*0.67);
+            text(labels122[8],ICON_OFFSET+1138+60,1072+buttonY*0.67);
+            text(labels122[9],ICON_OFFSET+1138+60,1132+buttonY*0.67);
+            text(labels122[10],ICON_OFFSET+1138+60,1192+buttonY*0.67);
             
             fill(COLOR);
             font = createFont("Arial",30,true);
             textFont(font);
-            text(user,ICON_OFFSET+1138+40,1212);
-            triangle(ICON_OFFSET+1138, 1206, ICON_OFFSET+1138+15, 1206-15, ICON_OFFSET+1138+30, 1206);
-            
+            text(user,ICON_OFFSET+1138+40,1312);
+            triangle(ICON_OFFSET+1138, 1306, ICON_OFFSET+1138+15, 1306-15, ICON_OFFSET+1138+30, 1306);
+  
             imgLock.resize(30, 30);
-            image(imgLock, ICON_OFFSET + 1345, 1185);
+            image(imgLock, ICON_OFFSET + 1345, 1285);
             
             moreButtonLength = buttonsMoreSet2.length;
             
             if(moreLang == 0){
               strokeWeight(4);
               stroke(COLOR);
-              line(ICON_OFFSET + 1148, 522, ICON_OFFSET + 1188, 522);
-              line(ICON_OFFSET + 1178, 512, ICON_OFFSET + 1188, 522);
-              line(ICON_OFFSET + 1178, 532, ICON_OFFSET + 1188, 522);
+              line(ICON_OFFSET + 1148, 622, ICON_OFFSET + 1188, 622);
+              line(ICON_OFFSET + 1178, 612, ICON_OFFSET + 1188, 622);
+              line(ICON_OFFSET + 1178, 632, ICON_OFFSET + 1188, 622);
               strokeWeight(0);
             }
             else if(moreLang == 1){
               strokeWeight(4);
               stroke(COLOR);
-              line(ICON_OFFSET + 1148, 582, ICON_OFFSET + 1188, 582);
-              line(ICON_OFFSET + 1178, 572, ICON_OFFSET + 1188, 582);
-              line(ICON_OFFSET + 1178, 592, ICON_OFFSET + 1188, 582);
+              line(ICON_OFFSET + 1148, 682, ICON_OFFSET + 1188, 682);
+              line(ICON_OFFSET + 1178, 672, ICON_OFFSET + 1188, 682);
+              line(ICON_OFFSET + 1178, 692, ICON_OFFSET + 1188, 682);
               strokeWeight(0);
             }
             else if(moreLang == 2){
               strokeWeight(4);
               stroke(COLOR);
-              line(ICON_OFFSET + 1148, 642, ICON_OFFSET + 1188, 642);
-              line(ICON_OFFSET + 1178, 632, ICON_OFFSET + 1188, 642);
-              line(ICON_OFFSET + 1178, 652, ICON_OFFSET + 1188, 642);
+              line(ICON_OFFSET + 1148, 742, ICON_OFFSET + 1188, 742);
+              line(ICON_OFFSET + 1178, 732, ICON_OFFSET + 1188, 742);
+              line(ICON_OFFSET + 1178, 752, ICON_OFFSET + 1188, 742);
               strokeWeight(0);
             }
             else if(moreLang == 3){
               strokeWeight(4);
               stroke(COLOR);
-              line(ICON_OFFSET + 1148, 702, ICON_OFFSET + 1188, 702);
-              line(ICON_OFFSET + 1178, 692, ICON_OFFSET + 1188, 702);
-              line(ICON_OFFSET + 1178, 712, ICON_OFFSET + 1188, 702);
+              line(ICON_OFFSET + 1148, 802, ICON_OFFSET + 1188, 802);
+              line(ICON_OFFSET + 1178, 792, ICON_OFFSET + 1188, 802);
+              line(ICON_OFFSET + 1178, 812, ICON_OFFSET + 1188, 802);
               strokeWeight(0);
             }
             else if(moreLang == 4){
               strokeWeight(4);
               stroke(COLOR);
-              line(ICON_OFFSET + 1148, 762, ICON_OFFSET + 1188, 762);
-              line(ICON_OFFSET + 1178, 752, ICON_OFFSET + 1188, 762);
-              line(ICON_OFFSET + 1178, 772, ICON_OFFSET + 1188, 762);
+              line(ICON_OFFSET + 1148, 862, ICON_OFFSET + 1188, 862);
+              line(ICON_OFFSET + 1178, 852, ICON_OFFSET + 1188, 862);
+              line(ICON_OFFSET + 1178, 872, ICON_OFFSET + 1188, 862);
               strokeWeight(0);
             }
             else if(moreLang == 5){
               strokeWeight(4);
               stroke(COLOR);
-              line(ICON_OFFSET + 1148, 822, ICON_OFFSET + 1188, 822);
-              line(ICON_OFFSET + 1178, 812, ICON_OFFSET + 1188, 822);
-              line(ICON_OFFSET + 1178, 832, ICON_OFFSET + 1188, 822);
+              line(ICON_OFFSET + 1148, 922, ICON_OFFSET + 1188, 922);
+              line(ICON_OFFSET + 1178, 912, ICON_OFFSET + 1188, 922);
+              line(ICON_OFFSET + 1178, 932, ICON_OFFSET + 1188, 922);
               strokeWeight(0);
             }
             else if(moreLang == 6){
               strokeWeight(4);
               stroke(COLOR);
-              line(ICON_OFFSET + 1148, 882, ICON_OFFSET + 1188, 882);
-              line(ICON_OFFSET + 1178, 872, ICON_OFFSET + 1188, 882);
-              line(ICON_OFFSET + 1178, 892, ICON_OFFSET + 1188, 882);
+              line(ICON_OFFSET + 1148, 982, ICON_OFFSET + 1188, 982);
+              line(ICON_OFFSET + 1178, 972, ICON_OFFSET + 1188, 982);
+              line(ICON_OFFSET + 1178, 992, ICON_OFFSET + 1188, 982);
               strokeWeight(0);
             }
             else if(moreLang == 7){
               strokeWeight(4);
               stroke(COLOR);
-              line(ICON_OFFSET + 1148, 942, ICON_OFFSET + 1188, 942);
-              line(ICON_OFFSET + 1178, 932, ICON_OFFSET + 1188, 942);
-              line(ICON_OFFSET + 1178, 952, ICON_OFFSET + 1188, 942);
+              line(ICON_OFFSET + 1148, 1042, ICON_OFFSET + 1188, 1042);
+              line(ICON_OFFSET + 1178, 1032, ICON_OFFSET + 1188, 1042);
+              line(ICON_OFFSET + 1178, 1052, ICON_OFFSET + 1188, 1042);
               strokeWeight(0);
             }
             else if(moreLang == 8){
               strokeWeight(4);
               stroke(COLOR);
-              line(ICON_OFFSET + 1148, 1002, ICON_OFFSET + 1188, 1002);
-              line(ICON_OFFSET + 1178, 992, ICON_OFFSET + 1188, 1002);
-              line(ICON_OFFSET + 1178, 1012, ICON_OFFSET + 1188, 1002);
+              line(ICON_OFFSET + 1148, 1102, ICON_OFFSET + 1188, 1102);
+              line(ICON_OFFSET + 1178, 1092, ICON_OFFSET + 1188, 1102);
+              line(ICON_OFFSET + 1178, 1112, ICON_OFFSET + 1188, 1102);
               strokeWeight(0);
             }
             else if(moreLang == 9){
               strokeWeight(4);
               stroke(COLOR);
-              line(ICON_OFFSET + 1148, 1062, ICON_OFFSET + 1188, 1062);
-              line(ICON_OFFSET + 1178, 1052, ICON_OFFSET + 1188, 1062);
-              line(ICON_OFFSET + 1178, 1072, ICON_OFFSET + 1188, 1062);
+              line(ICON_OFFSET + 1148, 1162, ICON_OFFSET + 1188, 1162);
+              line(ICON_OFFSET + 1178, 1152, ICON_OFFSET + 1188, 1162);
+              line(ICON_OFFSET + 1178, 1172, ICON_OFFSET + 1188, 1162);
               strokeWeight(0);
             }
 
               strokeWeight(4);
               stroke(COLOR);
-              line(ICON_OFFSET + 1148, 1122, ICON_OFFSET + 1188, 1122);
-              line(ICON_OFFSET + 1148, 1122, ICON_OFFSET + 1158, 1112);
-              line(ICON_OFFSET + 1148, 1122, ICON_OFFSET + 1158, 1132);
+              line(ICON_OFFSET + 1148, 1222, ICON_OFFSET + 1188, 1222);
+              line(ICON_OFFSET + 1148, 1222, ICON_OFFSET + 1158, 1212);
+              line(ICON_OFFSET + 1148, 1222, ICON_OFFSET + 1158, 1232);
               strokeWeight(0);
             
           }
@@ -2118,52 +2118,52 @@ class More {
             font = createFont("Arial",20,true);
             textFont(font);
 
-            text(labels123[0],ICON_OFFSET+1138+60,912+buttonY*0.67);
-            text(labels123[1],ICON_OFFSET+1138+60,972+buttonY*0.67);
-            text(labels123[2],ICON_OFFSET+1138+60,1032+buttonY*0.67);
-            text(labels123[3],ICON_OFFSET+1138+60,1092+buttonY*0.67);
+            text(labels123[0],ICON_OFFSET+1138+60,1012+buttonY*0.67);
+            text(labels123[1],ICON_OFFSET+1138+60,1072+buttonY*0.67);
+            text(labels123[2],ICON_OFFSET+1138+60,1132+buttonY*0.67);
+            text(labels123[3],ICON_OFFSET+1138+60,1192+buttonY*0.67);
             
             fill(COLOR);
             font = createFont("Arial",30,true);
             textFont(font);
-            text(user,ICON_OFFSET+1138+40,1212);
-            triangle(ICON_OFFSET+1138, 1206, ICON_OFFSET+1138+15, 1206-15, ICON_OFFSET+1138+30, 1206);
-            
+            text(user,ICON_OFFSET+1138+40,1312);
+            triangle(ICON_OFFSET+1138, 1306, ICON_OFFSET+1138+15, 1306-15, ICON_OFFSET+1138+30, 1306);
+          
             imgLock.resize(30, 30);
-            image(imgLock, ICON_OFFSET + 1345, 1185);
+            image(imgLock, ICON_OFFSET + 1345, 1285);
             
             moreButtonLength = buttonsMoreSet3.length;
             
             if(moreRepos == 0){
               strokeWeight(4);
               stroke(COLOR);
-              line(ICON_OFFSET + 1148, 942, ICON_OFFSET + 1188, 942);
-              line(ICON_OFFSET + 1178, 932, ICON_OFFSET + 1188, 942);
-              line(ICON_OFFSET + 1178, 952, ICON_OFFSET + 1188, 942);
+              line(ICON_OFFSET + 1148, 1042, ICON_OFFSET + 1188, 1042);
+              line(ICON_OFFSET + 1178, 1032, ICON_OFFSET + 1188, 1042);
+              line(ICON_OFFSET + 1178, 1052, ICON_OFFSET + 1188, 1042);
               strokeWeight(0);
             }
             else if(moreRepos == 1){
               strokeWeight(4);
               stroke(COLOR);
-              line(ICON_OFFSET + 1148, 1002, ICON_OFFSET + 1188, 1002);
-              line(ICON_OFFSET + 1178, 992, ICON_OFFSET + 1188, 1002);
-              line(ICON_OFFSET + 1178, 1012, ICON_OFFSET + 1188, 1002);
+              line(ICON_OFFSET + 1148, 1102, ICON_OFFSET + 1188, 1102);
+              line(ICON_OFFSET + 1178, 1092, ICON_OFFSET + 1188, 1102);
+              line(ICON_OFFSET + 1178, 1112, ICON_OFFSET + 1188, 1102);
               strokeWeight(0);
             }
             else if(moreRepos == 2){
               strokeWeight(4);
               stroke(COLOR);
-              line(ICON_OFFSET + 1148, 1062, ICON_OFFSET + 1188, 1062);
-              line(ICON_OFFSET + 1178, 1052, ICON_OFFSET + 1188, 1062);
-              line(ICON_OFFSET + 1178, 1072, ICON_OFFSET + 1188, 1062);
+              line(ICON_OFFSET + 1148, 1162, ICON_OFFSET + 1188, 1162);
+              line(ICON_OFFSET + 1178, 1152, ICON_OFFSET + 1188, 1162);
+              line(ICON_OFFSET + 1178, 1172, ICON_OFFSET + 1188, 1162);
               strokeWeight(0);
             }
 
               strokeWeight(4);
               stroke(COLOR);
-              line(ICON_OFFSET + 1148, 1122, ICON_OFFSET + 1188, 1122);
-              line(ICON_OFFSET + 1148, 1122, ICON_OFFSET + 1158, 1112);
-              line(ICON_OFFSET + 1148, 1122, ICON_OFFSET + 1158, 1132);
+              line(ICON_OFFSET + 1148, 1222, ICON_OFFSET + 1188, 1222);
+              line(ICON_OFFSET + 1148, 1222, ICON_OFFSET + 1158, 1212);
+              line(ICON_OFFSET + 1148, 1222, ICON_OFFSET + 1158, 1232);
               strokeWeight(0);
           }
        //color scheme
@@ -2179,35 +2179,35 @@ class More {
             font = createFont("Arial",20,true);
             textFont(font);
 
-            text(labels124[0],ICON_OFFSET+1138+60,792+buttonY*0.67);
-            text(labels124[1],ICON_OFFSET+1138+60,852+buttonY*0.67);
-            text(labels124[2],ICON_OFFSET+1138+60,912+buttonY*0.67);
-            text(labels124[3],ICON_OFFSET+1138+60,972+buttonY*0.67);
-            text(labels124[4],ICON_OFFSET+1138+60,1032+buttonY*0.67);
-            text(labels124[5],ICON_OFFSET+1138+60,1092+buttonY*0.67);
+            text(labels124[0],ICON_OFFSET+1138+60,892+buttonY*0.67);
+            text(labels124[1],ICON_OFFSET+1138+60,952+buttonY*0.67);
+            text(labels124[2],ICON_OFFSET+1138+60,1012+buttonY*0.67);
+            text(labels124[3],ICON_OFFSET+1138+60,1072+buttonY*0.67);
+            text(labels124[4],ICON_OFFSET+1138+60,1132+buttonY*0.67);
+            text(labels124[5],ICON_OFFSET+1138+60,1192+buttonY*0.67);
             
             fill(COLOR);
             font = createFont("Arial",30,true);
             textFont(font);
-            text(user,ICON_OFFSET+1138+40,1212);
-            triangle(ICON_OFFSET+1138, 1206, ICON_OFFSET+1138+15, 1206-15, ICON_OFFSET+1138+30, 1206);
-            
+            text(user,ICON_OFFSET+1138+40,1312);
+            triangle(ICON_OFFSET+1138, 1306, ICON_OFFSET+1138+15, 1306-15, ICON_OFFSET+1138+30, 1306);
+          
             strokeWeight(0);
             stroke(255,255,255);
             
             fill(255,225,0);
-            rect(ICON_OFFSET+1143,792+5,50,50);
+            rect(ICON_OFFSET+1143,892+5,50,50);
             fill(0,0,225);
-            rect(ICON_OFFSET+1143,852+5,50,50);
+            rect(ICON_OFFSET+1143,952+5,50,50);
             fill(225,0,0);
-            rect(ICON_OFFSET+1143,912+5,50,50);
+            rect(ICON_OFFSET+1143,1012+5,50,50);
             fill(165,42,42);
-            rect(ICON_OFFSET+1143,972+5,50,50);
+            rect(ICON_OFFSET+1143,1072+5,50,50);
             fill(0,0,0);
-            rect(ICON_OFFSET+1143,1032+5,50,50);
+            rect(ICON_OFFSET+1143,1132+5,50,50);
             
             imgLock.resize(30, 30);
-            image(imgLock, ICON_OFFSET + 1345, 1185);
+            image(imgLock, ICON_OFFSET + 1345, 1285);
             
             moreButtonLength = buttonsMoreSet4.length;
             /*
@@ -2254,9 +2254,9 @@ class More {
 
               strokeWeight(4);
               stroke(COLOR);
-              line(ICON_OFFSET + 1148, 1122, ICON_OFFSET + 1188, 1122);
-              line(ICON_OFFSET + 1148, 1122, ICON_OFFSET + 1158, 1112);
-              line(ICON_OFFSET + 1148, 1122, ICON_OFFSET + 1158, 1132);
+              line(ICON_OFFSET + 1148, 1222, ICON_OFFSET + 1188, 1222);
+              line(ICON_OFFSET + 1148, 1222, ICON_OFFSET + 1158, 1212);
+              line(ICON_OFFSET + 1148, 1222, ICON_OFFSET + 1158, 1232);
               strokeWeight(0);
 
           }
@@ -2265,11 +2265,11 @@ class More {
       background(200);
       font = createFont("Arial",30,true);
       textFont(font);
-      text(user,ICON_OFFSET+1138+40,1212);
-      triangle(ICON_OFFSET+1138, 1206, ICON_OFFSET+1138+15, 1206-15, ICON_OFFSET+1138+30, 1206);
-            
+      text(user,ICON_OFFSET+1138+40,1312);
+      triangle(ICON_OFFSET+1138, 1306, ICON_OFFSET+1138+15, 1306-15, ICON_OFFSET+1138+30, 1306);
+          
       imgLock.resize(30, 30);
-      image(imgLock, ICON_OFFSET + 1345, 1185);
+      image(imgLock, ICON_OFFSET + 1345, 1285);
             
     }
   }
@@ -2321,10 +2321,11 @@ class Info {
   void draw() {
     textSize(30);
     fill(COLOR);
-    text(time,ICON_OFFSET + 500,1300);
-    text(date,ICON_OFFSET + 700,1300);
+    text(time,ICON_OFFSET + 110,1400);
+    text(date,ICON_OFFSET + 260,1400);
   }
 }
+
 
 //*******************************end More classes*******************//
 
